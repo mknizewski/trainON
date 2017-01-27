@@ -1,4 +1,5 @@
 package uwb.trainon.managers;
+import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.StringExtensions;
 
 public class SignInManager
@@ -19,14 +20,17 @@ public class SignInManager
         return new SignInManager(login, password);
     }
 
-    public boolean CheckCreditendials()
+    public void CheckCreditendials() throws Exception
     {
-        return false;
+        if (Login.equals(StringExtensions.Empty) || Password.equals(StringExtensions.Empty))
+            throw new Exception(MessagesDictionary.LoginIncorrect);
+
+        // TODO: Sprawdzenie w pilku czy jest odpowiedni wpis
     }
 
     public void SignIn()
     {
-
+        // TODO: Model usera - klasa statyczna - ustawienie flagi IsAuth na true
     }
 
     public void SignOut()
