@@ -1,8 +1,11 @@
 package uwb.trainon;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 
 import uwb.trainon.dictionaries.MessagesDictionary;
@@ -13,11 +16,6 @@ public class MainActivity extends AppCompatActivity
 {
     private SignInManager _signInManager;
 
-    public MainActivity()
-    {
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -25,7 +23,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
     }
 
-    public void LoginEvent()
+    public void onClickLoginButton(View view)
     {
         EditText loginText = (EditText)findViewById(R.id.loginTextBox);
         String login = loginText.getText().toString();
@@ -46,22 +44,28 @@ public class MainActivity extends AppCompatActivity
 
     public void CheckCreditentials(String login, String password) throws Exception
     {
-        if (login == StringExtensions.Empty || password == StringExtensions.Empty)
+        if (login.equals(StringExtensions.Empty) || password.equals(StringExtensions.Empty))
             throw new Exception(MessagesDictionary.LoginIncorrect);
     }
 
-    public void RegisterEvent()
+    public void onClickRegisterButton(View view)
     {
-
+        // TODO: Czy coś przesyłamy do Register Activity? Może manager?
+        Intent registerIntent = new Intent(this, RegisterActivity.class);
+        startActivity(registerIntent);
     }
 
     private void ShowExceptionDialog(String meesage, String title)
     {
-        final AlertDialog exceptionDialog = new AlertDialog.Builder(MainActivity.this).create();
-
-        exceptionDialog.setTitle(title);
-        exceptionDialog.setMessage(meesage);
-
-        exceptionDialog.show();
+        AlertDialog alertDialog = new AlertDialog.Builder(MainActivity.this).create();
+        alertDialog.setTitle(title);
+        alertDialog.setMessage(meesage);
+        alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+        alertDialog.show();
     }
 }

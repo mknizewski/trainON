@@ -70,7 +70,7 @@
             android:text="Zaloguj się"
             android:width="200dp"
             android:id="@+id/loginButton"
-            android:onClick="LoginEvent"/>
+            android:onClick="onClickLoginButton"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -78,6 +78,6 @@
             android:text="Rejestracja"
             android:width="200dp"
             android:id="@+id/registerButton"
-            android:onClick="RegisterEvent"/>
+            android:onClick="onClickRegisterButton"/>
     </LinearLayout>
 </GridLayout>
