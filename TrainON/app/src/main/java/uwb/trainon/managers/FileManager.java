@@ -1,6 +1,21 @@
 package uwb.trainon.managers;
 
-public class FileManager
+import uwb.trainon.Interfaces.IManager;
+
+public class FileManager implements IManager
 {
-    // TODO: Odczyt/zapis pliku xml użytkownika, tworzenie plików itp.
+    private FileManager()
+    {
+
+    }
+
+    public static FileManager GetFileManager()
+    {
+        return new FileManager();
+    }
+
+    @Override
+    public void Dispose() {
+
+    }
 }

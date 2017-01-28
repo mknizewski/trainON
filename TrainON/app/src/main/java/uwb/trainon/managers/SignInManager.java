@@ -1,8 +1,9 @@
 package uwb.trainon.managers;
+import uwb.trainon.Interfaces.IManager;
 import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.StringExtensions;
 
-public class SignInManager
+public class SignInManager implements IManager
 {
     public String Login;
     public String Password;
@@ -37,5 +38,10 @@ public class SignInManager
     {
         this.Login = StringExtensions.Empty;
         this.Password = StringExtensions.Empty;
+    }
+
+    @Override
+    public void Dispose() {
+
     }
 }

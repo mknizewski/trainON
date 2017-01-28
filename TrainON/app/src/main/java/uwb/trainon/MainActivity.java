@@ -35,6 +35,8 @@ public class MainActivity extends AppCompatActivity
             _signInManager = SignInManager.GetManager(login, password);
             _signInManager.CheckCreditendials();
             _signInManager.SignIn();
+
+            this.SwitchToMainActivity();
         }
         catch (Exception ex)
         {
@@ -43,6 +45,11 @@ public class MainActivity extends AppCompatActivity
                     StringExtensions.ErrorTitle,
                     MainActivity.this);
         }
+    }
+
+    private void SwitchToMainActivity()
+    {
+
     }
 
     public void onClickRegisterButton(View view)
