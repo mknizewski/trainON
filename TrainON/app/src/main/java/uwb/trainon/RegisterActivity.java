@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 
+import java.io.IOException;
+
+import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.managers.RegisterManager;
@@ -35,6 +38,13 @@ public class RegisterActivity extends AppCompatActivity
             _registerManager.RegisterNewUser();
 
             this.SwitchActivityToMain();
+        }
+        catch (IOException ex)
+        {
+            AlertDialogExtension.ShowAlert(
+                    MessagesDictionary.PermissionDenied,
+                    StringExtensions.ErrorTitle,
+                    RegisterActivity.this);
         }
         catch (Exception ex)
         {

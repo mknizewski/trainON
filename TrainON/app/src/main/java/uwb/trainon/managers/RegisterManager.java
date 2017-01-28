@@ -1,7 +1,10 @@
 package uwb.trainon.managers;
 
+import java.io.IOException;
+
 import uwb.trainon.Interfaces.IManager;
 import uwb.trainon.dictionaries.MessagesDictionary;
+import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.factories.ModelFactory;
 import uwb.trainon.models.RegisterViewModel;
@@ -45,12 +48,14 @@ public class RegisterManager implements IManager
                 _registerViewModel.Password.length() < MinPasswordLength)
             throw new Exception(MessagesDictionary.PasswordDosentMatchPattern);
 
-
+        if (_fileManager.UserExists(_registerViewModel.Login))
+            throw new Exception(MessagesDictionary.LoginIsUsed);
     }
 
     public void RegisterNewUser()
+            throws IOException
     {
-        // TODO: Budować odpowiedni plik z kontem
+        _fileManager.SaveNewAccount(_registerViewModel.ToMap());
     }
 
     @Override
