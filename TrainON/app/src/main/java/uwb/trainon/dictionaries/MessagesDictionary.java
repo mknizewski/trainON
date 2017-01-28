@@ -7,4 +7,5 @@ public class MessagesDictionary
     public static String LoginIsEmpty = "Pole Login jest puste!";
     public static String LoginIsUsed = "Podany login jest już zajęty!";
     public static String PermissionDenied = "Aplikacja nie ma dostęu do danych!";
+    public static String LoginNotFound = "Nie znaleziono podangeo loginu!";
 }

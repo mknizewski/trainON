@@ -1,10 +1,15 @@
 package uwb.trainon.managers;
+
+import java.util.Map;
+
 import uwb.trainon.Interfaces.IManager;
 import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.StringExtensions;
 
 public class SignInManager implements IManager
 {
+    private FileManager _fileManager;
+
     public String Login;
     public String Password;
     public boolean IsAuthenticated;
@@ -14,6 +19,7 @@ public class SignInManager implements IManager
         this.Login = login;
         this.Password = password;
         this.IsAuthenticated = false;
+        this._fileManager = FileManager.GetFileManager();
     }
 
     public static SignInManager GetManager(String login, String password)
@@ -21,12 +27,20 @@ public class SignInManager implements IManager
         return new SignInManager(login, password);
     }
 
-    public void CheckCreditendials() throws Exception
+    public void CheckCreditendials()
+            throws Exception
     {
         if (Login.equals(StringExtensions.Empty) || Password.equals(StringExtensions.Empty))
             throw new Exception(MessagesDictionary.LoginIncorrect);
 
-        // TODO: Sprawdzenie w pilku czy jest odpowiedni wpis
+        if (!_fileManager.UserExists(Login))
+            throw new Exception(MessagesDictionary.LoginNotFound);
+
+        Map<String, String> userMap = _fileManager.GetUserDataFromFile(Login);
+        String passwordFromFile = userMap.get("Password").toString();
+
+        if (!Password.equals(passwordFromFile))
+            throw new Exception(MessagesDictionary.LoginIncorrect);
     }
 
     public void SignIn()

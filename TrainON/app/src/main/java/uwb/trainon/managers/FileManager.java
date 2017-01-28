@@ -22,6 +22,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
 import uwb.trainon.Interfaces.IManager;
+import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.models.RegisterViewModel;
 
@@ -96,7 +97,7 @@ public class FileManager implements IManager
             throws IOException, ParserConfigurationException,
                    SAXException
     {
-        String profilePath = FileManager.GetAppFolderPath() + login + XmlProfileName;
+        String profilePath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlProfileName;
         File profile = new File(profilePath);
         FileInputStream inputStream = new FileInputStream(profile);
         InputStreamReader streamReader = new InputStreamReader(inputStream);
@@ -104,7 +105,7 @@ public class FileManager implements IManager
         char[] inputBuffer = new char[inputStream.available()];
         streamReader.read(inputBuffer);
 
-        String data = new String(inputBuffer);
+        String data = new String(inputBuffer).replace("\n", "").replace("\r", "").replace(" ", "");
 
         streamReader.close();
         inputStream.close();
@@ -117,11 +118,12 @@ public class FileManager implements IManager
         document.getDocumentElement().normalize();
 
         NodeList items = document.getElementsByTagName("profile");
+        NodeList itemList = items.item(0).getChildNodes();
 
         registerModel.Login = login;
-        registerModel.Password = items.item(1).getNodeValue();
-        registerModel.Weight = Integer.parseInt(items.item(2).getNodeValue());
-        registerModel.Growth = Integer.parseInt(items.item(3).getNodeValue());
+        registerModel.Password = itemList.item(1).getTextContent();
+        registerModel.Weight = Integer.parseInt(itemList.item(2).getTextContent());
+        registerModel.Growth = Integer.parseInt(itemList.item(3).getTextContent());
 
         return registerModel.ToMap();
     }
