@@ -16,6 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.managers.UserManager;
 import uwb.trainon.models.User;
 
@@ -24,12 +25,17 @@ public class Main2Activity extends AppCompatActivity
 
     private UserManager _userManager;
 
-    private void GetUserManager()
+    private void GetUser()
     {
         Intent intent = getIntent();
         User user = intent.getParcelableExtra("User");
 
         _userManager = UserManager.GetUserManager(user);
+    }
+
+    public UserManager GetUserManager()
+    {
+        return _userManager;
     }
 
     @Override
@@ -58,7 +64,7 @@ public class Main2Activity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        this.GetUserManager();
+        this.GetUser();
         this.InitializeView(navigationView.getHeaderView(0));
     }
 
@@ -66,6 +72,10 @@ public class Main2Activity extends AppCompatActivity
     {
         TextView loginInNav = (TextView) header.findViewById(R.id.loginInNav);
         loginInNav.setText(_userManager.User.Login);
+
+        TextView bmiInNav = (TextView) header.findViewById(R.id.bmiInNav);
+        String bmiFormat = String.format(bmiInNav.getText().toString(), _userManager.User.GetBmi());
+        bmiInNav.setText(bmiFormat);
     }
 
     @Override
@@ -117,8 +127,8 @@ public class Main2Activity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_logout) {
+            AlertDialogExtension.LogOutAlert(this);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class User implements Parcelable
 {
-    private static final int Meters = 100;
+    private static final double Meters = 100.0;
 
     public String Login;
     public String Password;
@@ -54,8 +54,14 @@ public class User implements Parcelable
 
     private void CalculateBMI()
     {
-        double widthInMeters = Weight / Meters;
-        this.BMI = Growth / Math.pow(widthInMeters, 2.0);
+        double widthInMeters = Growth / Meters;
+        this.BMI = Weight / Math.pow(widthInMeters, 2.0);
+    }
+
+    public double GetBmi()
+    {
+        this.CalculateBMI();
+        return BMI;
     }
 
     @Override
