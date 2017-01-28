@@ -11,6 +11,7 @@ import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.factories.IntentFactory;
 import uwb.trainon.managers.FileManager;
 import uwb.trainon.managers.SignInManager;
+import uwb.trainon.models.User;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -36,9 +37,9 @@ public class MainActivity extends AppCompatActivity
         {
             _signInManager = SignInManager.GetManager(login, password);
             _signInManager.CheckCreditendials();
-            _signInManager.SignIn();
+            User user = _signInManager.SignIn();
 
-            this.SwitchToMainActivity();
+            this.SwitchToMainActivity(user);
         }
         catch (Exception ex)
         {
@@ -49,9 +50,12 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    private void SwitchToMainActivity()
+    private void SwitchToMainActivity(User user)
     {
+        Intent intent = IntentFactory.GetIntent(this, Main2Activity.class);
+        intent.putExtra("User", user);
 
+        startActivity(intent);
     }
 
     public void onClickRegisterButton(View view)

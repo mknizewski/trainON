@@ -3,7 +3,7 @@ package uwb.trainon.models;
 import java.util.HashMap;
 import java.util.Map;
 
-import uwb.trainon.Interfaces.IModel;
+import uwb.trainon.interfaces.IModel;
 
 public class RegisterViewModel implements IModel
 {

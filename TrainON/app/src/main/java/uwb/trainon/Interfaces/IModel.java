@@ -1,4 +1,4 @@
-package uwb.trainon.Interfaces;
+package uwb.trainon.interfaces;
 
 import java.util.Map;
 

@@ -1,10 +1,16 @@
 package uwb.trainon.managers;
 
+import org.xml.sax.SAXException;
+
+import java.io.IOException;
 import java.util.Map;
 
-import uwb.trainon.Interfaces.IManager;
+import javax.xml.parsers.ParserConfigurationException;
+
+import uwb.trainon.interfaces.IManager;
 import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.StringExtensions;
+import uwb.trainon.models.User;
 
 public class SignInManager implements IManager
 {
@@ -12,13 +18,11 @@ public class SignInManager implements IManager
 
     public String Login;
     public String Password;
-    public boolean IsAuthenticated;
 
     private SignInManager(String login, String password)
     {
         this.Login = login;
         this.Password = password;
-        this.IsAuthenticated = false;
         this._fileManager = FileManager.GetFileManager();
     }
 
@@ -43,15 +47,12 @@ public class SignInManager implements IManager
             throw new Exception(MessagesDictionary.LoginIncorrect);
     }
 
-    public void SignIn()
+    public User SignIn()
+            throws IOException, SAXException, ParserConfigurationException
     {
-        // TODO: Model usera - klasa statyczna - ustawienie flagi IsAuth na true
-    }
+        User userModel = User.GetUser(_fileManager.GetUserDataFromFile(Login));
 
-    public void SignOut()
-    {
-        this.Login = StringExtensions.Empty;
-        this.Password = StringExtensions.Empty;
+        return userModel;
     }
 
     @Override

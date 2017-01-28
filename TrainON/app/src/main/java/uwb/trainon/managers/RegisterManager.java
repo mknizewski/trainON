@@ -2,7 +2,7 @@ package uwb.trainon.managers;
 
 import java.io.IOException;
 
-import uwb.trainon.Interfaces.IManager;
+import uwb.trainon.interfaces.IManager;
 import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.models.RegisterViewModel;
