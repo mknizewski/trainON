@@ -4,9 +4,7 @@ import java.io.IOException;
 
 import uwb.trainon.Interfaces.IManager;
 import uwb.trainon.dictionaries.MessagesDictionary;
-import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.extensions.StringExtensions;
-import uwb.trainon.factories.ModelFactory;
 import uwb.trainon.models.RegisterViewModel;
 
 public class RegisterManager implements IManager
@@ -19,7 +17,7 @@ public class RegisterManager implements IManager
     private RegisterManager()
     {
         this._fileManager = FileManager.GetFileManager();
-        this._registerViewModel = ModelFactory.GetModel(RegisterViewModel.class);
+        this._registerViewModel = new RegisterViewModel();
     }
 
     public static RegisterManager GetRegisterManager()

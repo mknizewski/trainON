@@ -9,6 +9,7 @@ import android.widget.EditText;
 import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.factories.IntentFactory;
+import uwb.trainon.managers.FileManager;
 import uwb.trainon.managers.SignInManager;
 
 public class MainActivity extends AppCompatActivity
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        FileManager.CreateAppFolderIfDosentExists();
     }
 
     public void onClickLoginButton(View view)

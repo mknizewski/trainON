@@ -4,7 +4,6 @@ import android.os.Environment;
 import android.util.Xml;
 
 import org.w3c.dom.Document;
-import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import org.xmlpull.v1.XmlSerializer;
@@ -16,7 +15,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -25,7 +23,6 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import uwb.trainon.Interfaces.IManager;
 import uwb.trainon.extensions.StringExtensions;
-import uwb.trainon.factories.ModelFactory;
 import uwb.trainon.models.RegisterViewModel;
 
 public class FileManager implements IManager
@@ -46,7 +43,10 @@ public class FileManager implements IManager
         String weight = registerMap.get("Weight").toString();
         String growth = registerMap.get(("Growth")).toString();
         String userFolder = FileManager.GetAppFolderPath() + login;
-        String userProfileFile = userFolder + XmlProfileName;
+        String userProfileFile = userFolder + StringExtensions.Slash  + XmlProfileName;
+
+        File directoryProfile = new File(userFolder);
+        directoryProfile.mkdir();
 
         File profile = new File(userProfileFile);
         profile.createNewFile();
@@ -110,7 +110,7 @@ public class FileManager implements IManager
         inputStream.close();
 
         InputStream in = new ByteArrayInputStream(data.getBytes(StringExtensions.UTF));
-        RegisterViewModel registerModel = ModelFactory.GetModel(RegisterViewModel.class);
+        RegisterViewModel registerModel = new RegisterViewModel();
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
         Document document = db.parse(in);
@@ -133,6 +133,17 @@ public class FileManager implements IManager
         String appFolderPath = absolutePath + slash + AppName + slash;
 
         return  appFolderPath;
+    }
+
+    public static void CreateAppFolderIfDosentExists()
+    {
+        String slash = StringExtensions.Slash;
+        String absolutePath = Environment.getExternalStorageDirectory().getAbsolutePath();
+        String appFolderPath = absolutePath + slash + AppName;
+        File directory = new File(appFolderPath);
+
+        if (!directory.exists())
+            directory.mkdir();
     }
 
     @Override
