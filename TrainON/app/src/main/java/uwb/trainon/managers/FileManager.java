@@ -15,6 +15,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -71,8 +72,49 @@ public class FileManager implements IManager
     }
 
     public List<ProvisionViewModel> GetProvisions(String login)
+            throws IOException, ParserConfigurationException,
+                   SAXException
     {
         List<ProvisionViewModel> provisionViewModelList = new ArrayList<>();
+        String provisionsPath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlProvisionsName;
+        File provisionFile = new File(provisionsPath);
+        FileInputStream inputStream = new FileInputStream(provisionFile);
+        InputStreamReader streamReader = new InputStreamReader(inputStream);
+
+        char[] inputBuffer = new char[inputStream.available()];
+        streamReader.read(inputBuffer);
+
+        String data = new String(inputBuffer)
+                .replace("\n", "")
+                .replace("\r", "")
+                .replace(" ", "");
+
+        streamReader.close();
+        inputStream.close();
+
+        try
+        {
+            InputStream in = new ByteArrayInputStream(data.getBytes(StringExtensions.UTF));
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(in);
+            document.getDocumentElement().normalize();
+
+            NodeList items = document.getElementsByTagName("provision");
+
+            for (int i = 0; i < items.getLength(); i++)
+            {
+                NodeList itemList = items.item(i).getChildNodes();
+                ProvisionViewModel viewModel = new ProvisionViewModel();
+
+                viewModel.Target = itemList.item(0).getTextContent();
+                viewModel.Realization = Date.valueOf(itemList.item(1).getTextContent());
+                viewModel.Activity = itemList.item(2).getTextContent();
+
+                provisionViewModelList.add(viewModel);
+            }
+        }
+        catch (Exception ex){}
 
         return provisionViewModelList;
     }
@@ -182,7 +224,10 @@ public class FileManager implements IManager
         char[] inputBuffer = new char[inputStream.available()];
         streamReader.read(inputBuffer);
 
-        String data = new String(inputBuffer).replace("\n", "").replace("\r", "").replace(" ", "");
+        String data = new String(inputBuffer)
+                .replace("\n", "")
+                .replace("\r", "")
+                .replace(" ", "");
 
         streamReader.close();
         inputStream.close();

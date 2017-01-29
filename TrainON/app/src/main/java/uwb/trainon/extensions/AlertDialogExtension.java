@@ -1,10 +1,12 @@
 package uwb.trainon.extensions;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import uwb.trainon.Main2Activity;
 import uwb.trainon.MainActivity;
@@ -15,7 +17,7 @@ public class AlertDialogExtension
 {
     public static void ShowAlert(String meesage,
                                  String title,
-                                 AppCompatActivity activity)
+                                 Context activity)
     {
         AlertDialog alertDialog = new AlertDialog.Builder(activity).create();
         alertDialog.setTitle(title);
