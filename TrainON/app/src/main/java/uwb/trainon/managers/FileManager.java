@@ -15,6 +15,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -23,12 +25,14 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import uwb.trainon.interfaces.IManager;
 import uwb.trainon.extensions.StringExtensions;
+import uwb.trainon.models.ProvisionViewModel;
 import uwb.trainon.models.RegisterViewModel;
 
 public class FileManager implements IManager
 {
     private static final String AppName = "TrainON";
     private static final String XmlProfileName = "profile.xml";
+    private static final String XmlProvisionsName = "provisions.xml";
 
     public static FileManager GetFileManager()
     {
@@ -36,6 +40,80 @@ public class FileManager implements IManager
     }
 
     public void SaveNewAccount(Map<String, String> registerMap)
+            throws IOException
+    {
+        this.CreateProfileXml(registerMap);
+        this.CreateProvisionsXml(registerMap);
+    }
+
+    private void CreateProvisionsXml(Map<String, String> registerMap)
+            throws IOException
+    {
+        String login = registerMap.get("Login").toString();
+        String userFolder = FileManager.GetAppFolderPath() + login;
+        String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
+
+        File provision = new File(provisionFile);
+        provision.createNewFile();
+
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        FileOutputStream outputStream = new FileOutputStream(provision, false);
+
+        xmlSerializer.setOutput(outputStream, StringExtensions.UTF);
+        xmlSerializer.startDocument(null, Boolean.TRUE);
+        xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+
+        xmlSerializer.endDocument();
+        xmlSerializer.flush();
+
+        outputStream.flush();
+        outputStream.close();
+    }
+
+    public List<ProvisionViewModel> GetProvisions(String login)
+    {
+        List<ProvisionViewModel> provisionViewModelList = new ArrayList<>();
+
+        return provisionViewModelList;
+    }
+
+    public void AddProvisions(String login, ProvisionViewModel provisionViewModel)
+            throws IOException
+    {
+        String userFolder = FileManager.GetAppFolderPath() + login;
+        String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
+
+        File provision = new File(provisionFile);
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        FileOutputStream fileOutputStream = new FileOutputStream(provision, true);
+
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
+        xmlSerializer.startDocument(null, Boolean.TRUE);
+
+        xmlSerializer.startTag(null, "provision");
+
+        xmlSerializer.startTag(null, "target");
+        xmlSerializer.text(provisionViewModel.Target);
+        xmlSerializer.endTag(null, "target");
+
+        xmlSerializer.startTag(null, "date");
+        xmlSerializer.text(provisionViewModel.Realization.toString());
+        xmlSerializer.endTag(null, "date");
+
+        xmlSerializer.startTag(null, "activity");
+        xmlSerializer.text(provisionViewModel.Activity);
+        xmlSerializer.endTag(null, "activity");
+
+        xmlSerializer.endTag(null, "provision");
+
+        xmlSerializer.endDocument();
+        xmlSerializer.flush();
+
+        fileOutputStream.flush();
+        fileOutputStream.close();
+    }
+
+    private void CreateProfileXml(Map<String, String> registerMap)
             throws IOException
     {
         String login = registerMap.get("Login").toString();
