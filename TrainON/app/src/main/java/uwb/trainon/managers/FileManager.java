@@ -44,7 +44,7 @@ public class FileManager implements IManager
             throws IOException
     {
         this.CreateProfileXml(registerMap);
-        this.CreateProvisionsXml(registerMap);
+        //this.CreateProvisionsXml(registerMap);
     }
 
     private void CreateProvisionsXml(Map<String, String> registerMap)
@@ -75,32 +75,32 @@ public class FileManager implements IManager
             throws IOException, ParserConfigurationException,
                    SAXException
     {
-        List<ProvisionViewModel> provisionViewModelList = new ArrayList<>();
-        String provisionsPath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlProvisionsName;
-        File provisionFile = new File(provisionsPath);
-        FileInputStream inputStream = new FileInputStream(provisionFile);
-        InputStreamReader streamReader = new InputStreamReader(inputStream);
-
-        char[] inputBuffer = new char[inputStream.available()];
-        streamReader.read(inputBuffer);
-
-        String data = new String(inputBuffer)
-                .replace("\n", "")
-                .replace("\r", "")
-                .replace(" ", "");
-
-        streamReader.close();
-        inputStream.close();
-
         try
         {
+            List<ProvisionViewModel> provisionViewModelList = new ArrayList<>();
+            String provisionsPath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlProvisionsName;
+            File provisionFile = new File(provisionsPath);
+            FileInputStream inputStream = new FileInputStream(provisionFile);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+
+            char[] inputBuffer = new char[inputStream.available()];
+            streamReader.read(inputBuffer);
+
+            String data = new String(inputBuffer)
+                    .replace("\n", "")
+                    .replace("\r", "")
+                    .replace(" ", "");
+
+            streamReader.close();
+            inputStream.close();
+
             InputStream in = new ByteArrayInputStream(data.getBytes(StringExtensions.UTF));
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
             Document document = db.parse(in);
-            document.getDocumentElement().normalize();
 
-            NodeList items = document.getElementsByTagName("provision");
+            NodeList root = document.getElementsByTagName("provisions");
+            NodeList items = root.item(0).getChildNodes();
 
             for (int i = 0; i < items.getLength(); i++)
             {
@@ -113,25 +113,38 @@ public class FileManager implements IManager
 
                 provisionViewModelList.add(viewModel);
             }
-        }
-        catch (Exception ex){}
 
-        return provisionViewModelList;
+            return provisionViewModelList;
+        }
+        catch (Exception ex){
+            return new ArrayList<>();
+        }
     }
 
     public void AddProvisions(String login, ProvisionViewModel provisionViewModel)
-            throws IOException
+            throws IOException, SAXException, ParserConfigurationException
     {
         String userFolder = FileManager.GetAppFolderPath() + login;
         String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
-
+        List<ProvisionViewModel> provisionViewModelList = new ArrayList<>();
         File provision = new File(provisionFile);
+
+        if (provision.exists())
+        {
+            provisionViewModelList = this.GetProvisions(login);
+            provision.delete();
+        }
+
+        provision.createNewFile();
+
         XmlSerializer xmlSerializer = Xml.newSerializer();
         FileOutputStream fileOutputStream = new FileOutputStream(provision, true);
 
         xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
         xmlSerializer.startDocument(null, Boolean.TRUE);
+        xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
 
+        xmlSerializer.startTag(null, "provisions");
         xmlSerializer.startTag(null, "provision");
 
         xmlSerializer.startTag(null, "target");
@@ -147,6 +160,27 @@ public class FileManager implements IManager
         xmlSerializer.endTag(null, "activity");
 
         xmlSerializer.endTag(null, "provision");
+
+        for (ProvisionViewModel viewModel : provisionViewModelList)
+        {
+            xmlSerializer.startTag(null, "provision");
+
+            xmlSerializer.startTag(null, "target");
+            xmlSerializer.text(viewModel.Target);
+            xmlSerializer.endTag(null, "target");
+
+            xmlSerializer.startTag(null, "date");
+            xmlSerializer.text(viewModel.Realization.toString());
+            xmlSerializer.endTag(null, "date");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(viewModel.Activity);
+            xmlSerializer.endTag(null, "activity");
+
+            xmlSerializer.endTag(null, "provision");
+        }
+
+        xmlSerializer.endTag(null, "provisions");
 
         xmlSerializer.endDocument();
         xmlSerializer.flush();

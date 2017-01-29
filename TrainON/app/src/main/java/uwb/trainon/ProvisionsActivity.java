@@ -99,7 +99,6 @@ public class ProvisionsActivity extends Fragment
     {
         Intent addProvisionIntent = IntentFactory.GetIntent(myView.getContext(), AddProvisionActivity.class);
         addProvisionIntent.putExtra("User", _userManager.User);
-
         startActivity(addProvisionIntent);
     }
 }

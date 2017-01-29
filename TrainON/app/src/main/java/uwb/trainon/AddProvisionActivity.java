@@ -4,6 +4,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.Spinner;
+
+import java.sql.Date;
 
 import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.extensions.StringExtensions;
@@ -40,6 +44,7 @@ public class AddProvisionActivity extends AppCompatActivity
         {
             ProvisionViewModel viewModel = this.GetProvisionViewModel();
             _fileManager.AddProvisions(_userManager.User.Login, viewModel);
+
             finish();
         }
         catch (Exception ex)
@@ -55,6 +60,17 @@ public class AddProvisionActivity extends AppCompatActivity
     {
         ProvisionViewModel viewModel = new ProvisionViewModel();
 
+        EditText targetEditText = (EditText) findViewById(R.id.add_provision_target);
+        EditText realizationEditText = (EditText) findViewById(R.id.add_provision_realization);
+        Spinner activitySpinner = (Spinner) findViewById(R.id.add_provision_activity);
+
+        String target = targetEditText.getText().toString();
+        String realization = realizationEditText.getText().toString();
+        String activity = String.valueOf(activitySpinner.getSelectedItem());
+
+        viewModel.Target = target;
+        viewModel.Realization = Date.valueOf(realization);
+        viewModel.Activity = activity;
 
         return viewModel;
     }
