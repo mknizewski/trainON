@@ -1,6 +1,7 @@
 package uwb.trainon;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -15,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import java.util.Random;
 
 import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.managers.UserManager;
@@ -66,6 +69,18 @@ public class Main2Activity extends AppCompatActivity
 
         this.GetUser();
         this.InitializeView(navigationView.getHeaderView(0));
+
+        //set text from array
+        Resources res = getResources();
+        String[] sentences = res.getStringArray(R.array.sentences);
+        TextView myAwesomeTextView = (TextView)findViewById(R.id.sentence);
+
+        int size = sentences.length;
+        int val;
+        Random r = new Random();
+        val = r.nextInt(size);
+        //String textString = Integer.toString(val);
+        myAwesomeTextView.setText(sentences[val]);
     }
 
     private void InitializeView(View header)

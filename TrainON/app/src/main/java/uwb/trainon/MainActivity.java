@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity
         FileManager.CreateAppFolderIfDosentExists();
 
         //new Thread(new waitingToStart()).start();
-        findViewById(R.id.loadingPanel).setVisibility(View.GONE); //wylaczam ladowanie
+        //findViewById(R.id.loadingPanel).setVisibility(View.GONE); //wylaczam ladowanie
     }
 
     public void onClickLoginButton(View view)
@@ -68,16 +68,16 @@ public class MainActivity extends AppCompatActivity
         startActivity(registerIntent);
     }
 
-    class waitingToStart implements Runnable
-    {
-        @Override
-        public void run() {
-            try{
-                Thread.sleep(3000);
-            } catch(InterruptedException e){
-                e.printStackTrace();
-            }
-            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
-        }
-    }
+//    class waitingToStart implements Runnable
+//    {
+//        @Override
+//        public void run() {
+//            try{
+//                Thread.sleep(3000);
+//            } catch(InterruptedException e){
+//                e.printStackTrace();
+//            }
+//            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+//        }
+//    }
 }

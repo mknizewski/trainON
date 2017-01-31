@@ -9,6 +9,13 @@
     <string name="title_activity_main2">TrainON</string>
     <string name="title_activity_settings">Ustawienia</string>
 
+    <!-- CYTATY -->
+    <string-array name="sentences">
+        <item>Tam, gdzie nie ma walki, nie ma siły.</item>
+        <item>When possible</item>
+        <item>Never</item>
+    </string-array>
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
