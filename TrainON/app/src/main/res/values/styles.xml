@@ -17,6 +17,10 @@
         <item name="android:windowBackground">@color/colorWhite</item>
     </style>
 
+    <style name="sentence" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowBackground">@color/colorWhite</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

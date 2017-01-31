@@ -73,14 +73,16 @@ public class Main2Activity extends AppCompatActivity
         //set text from array
         Resources res = getResources();
         String[] sentences = res.getStringArray(R.array.sentences);
+        String[] authors = res.getStringArray(R.array.authors);
         TextView myAwesomeTextView = (TextView)findViewById(R.id.sentence);
 
         int size = sentences.length;
         int val;
         Random r = new Random();
         val = r.nextInt(size);
-        //String textString = Integer.toString(val);
-        myAwesomeTextView.setText(sentences[val]);
+        String result;
+        result = sentences[val] + System.getProperty ("line.separator") + authors[val];
+        myAwesomeTextView.setText(result);
     }
 
     private void InitializeView(View header)
