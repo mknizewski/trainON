@@ -1,6 +1,7 @@
 package uwb.trainon;
 
 import android.content.Intent;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -23,6 +24,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         FileManager.CreateAppFolderIfDosentExists();
+
+        //new Thread(new waitingToStart()).start();
+        findViewById(R.id.loadingPanel).setVisibility(View.GONE); //wylaczam ladowanie
     }
 
     public void onClickLoginButton(View view)
@@ -62,5 +66,18 @@ public class MainActivity extends AppCompatActivity
     {
         Intent registerIntent = IntentFactory.GetIntent(this, RegisterActivity.class);
         startActivity(registerIntent);
+    }
+
+    class waitingToStart implements Runnable
+    {
+        @Override
+        public void run() {
+            try{
+                Thread.sleep(3000);
+            } catch(InterruptedException e){
+                e.printStackTrace();
+            }
+            findViewById(R.id.loadingPanel).setVisibility(View.GONE);
+        }
     }
 }
