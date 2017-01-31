@@ -6,12 +6,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:openDrawer="start">
+    tools:openDrawer="start"
+    android:theme="@style/CustomTheme">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/sentence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="50dp"
+            android:text="Tutaj będzie cytacik na dziś"
+            android:textSize="24sp"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="sans-serif"
+            android:lineSpacingExtra="12sp"
+            android:textStyle="normal|italic"
+            android:textAllCaps="false" />
+
+    </LinearLayout>
 
     <include
         layout="@layout/app_bar_main2"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
@@ -19,7 +42,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
+
         app:headerLayout="@layout/nav_header_main2"
         app:menu="@menu/activity_main2_drawer" />
-
 </android.support.v4.widget.DrawerLayout>

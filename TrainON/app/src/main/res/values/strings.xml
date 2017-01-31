@@ -9,6 +9,32 @@
     <string name="title_activity_main2">TrainON</string>
     <string name="title_activity_settings">Ustawienia</string>
 
+    <!-- CYTATY -->
+    <string-array name="sentences">
+        <item>Tam, gdzie nie ma walki, nie ma siły.</item>
+        <item>Przyszłość należy do tych, którzy wierzą w piękno swoich marzeń.</item>
+        <item>Możesz zrobić wszystko, co chcesz jeśli tylko trzymasz się tego celu wystarczająco długo. </item>
+        <item>Ból przemija, a skutki rezygnacji pozostają na zawsze.</item>
+        <item>Sukces to suma niewielkiego wysiłku powtarzanego z dnia na dzień. </item>
+        <item>Człowieka można zniszczyć, ale nie pokonać.</item>
+        <item>Zanim coś osiągniesz, musisz czegoś od siebie oczekiwać.</item>
+        <item>Ludzie mogą wątpić w to co mówisz, ale uwierzą w to co robisz. </item>
+        <item>Człowiek, który nie robi błędów, zwykle nie robi niczego. </item>
+        <item>Stan Twojego życia jest niczym innym jak odbiciem stanu Twojego umysłu. </item>
+    </string-array>
+    <string-array name="authors">
+        <item>Oprah Winfrey</item>
+        <item>Eleanor Rossevelt</item>
+        <item>Helen Keller</item>
+        <item>Lance Armstrong</item>
+        <item>Robert Collier</item>
+        <item>Ernest Hamingway</item>
+        <item>Michael Jordan</item>
+        <item>Lewis Cass</item>
+        <item>Edward John Phelps</item>
+        <item>Wayne W. Dyer</item>
+    </string-array>
+
     <!-- Strings related to Settings -->
 
     <!-- Example General settings -->
