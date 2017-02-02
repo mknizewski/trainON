@@ -24,16 +24,19 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
+import uwb.trainon.TreningActivity;
 import uwb.trainon.interfaces.IManager;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.models.ProvisionViewModel;
 import uwb.trainon.models.RegisterViewModel;
+import uwb.trainon.models.TreningViewModel;
 
 public class FileManager implements IManager
 {
     private static final String AppName = "TrainON";
     private static final String XmlProfileName = "profile.xml";
     private static final String XmlProvisionsName = "provisions.xml";
+    private static final String XmlTreningName = "trening.xml";
 
     public static FileManager GetFileManager()
     {
@@ -69,6 +72,19 @@ public class FileManager implements IManager
 
         outputStream.flush();
         outputStream.close();
+    }
+
+    public List<TreningViewModel> GetUserTrening(String login)
+    {
+        List<TreningViewModel> treningViewModelList = new ArrayList<>();
+
+        return treningViewModelList;
+    }
+
+    public void SaveTreningByDay(TreningViewModel viewModel)
+            throws IOException
+    {
+
     }
 
     public List<ProvisionViewModel> GetProvisions(String login)
@@ -306,7 +322,5 @@ public class FileManager implements IManager
 
     @Override
     public void Dispose()
-    {
-
-    }
+    { }
 }

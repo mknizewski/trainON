@@ -3,6 +3,10 @@
 
     <group android:checkableBehavior="single">
         <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/home"
+            android:title="Główna" />
+        <item
             android:id="@+id/nav_trening"
             android:icon="@drawable/exercise"
             android:title="Plan treningowy" />
