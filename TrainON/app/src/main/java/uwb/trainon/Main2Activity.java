@@ -124,8 +124,11 @@ public class Main2Activity extends AppCompatActivity
 
         if (id == R.id.nav_main)
         {
+            HomeActivity homeActivity = new HomeActivity();
+            homeActivity.SetUserManager(_userManager);
+
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_main2, new HomeActivity())
+                    .replace(R.id.content_main2, homeActivity)
                     .commit();
         }
         if (id == R.id.nav_trening)

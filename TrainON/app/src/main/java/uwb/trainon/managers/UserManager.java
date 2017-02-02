@@ -25,11 +25,9 @@ public class UserManager implements IManager, Serializable
     }
 
     public void SignOut()
-    {
+    { }
 
-    }
-
-    public String getRandomSentences(View view)
+    public String GetRandomSentences(View view)
     {
         Resources res = view.getResources();
         String[] sentences = res.getStringArray(R.array.sentences);
@@ -47,7 +45,5 @@ public class UserManager implements IManager, Serializable
 
     @Override
     public void Dispose()
-    {
-
-    }
+    { }
 }

@@ -32,6 +32,6 @@ public class HomeActivity extends Fragment
     private void GetSentence()
     {
         TextView myAwesomeTextView = (TextView)myView.findViewById(R.id.sentence);
-        myAwesomeTextView.setText(_userManager.getRandomSentences(myView));
+        myAwesomeTextView.setText(_userManager.GetRandomSentences(myView));
     }
 }
