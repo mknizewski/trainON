@@ -33,12 +33,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_trainon"
-            android:layout_weight="2" />
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:background="@color/aplha"
+            android:layout_marginTop="40dp"
+            >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Logowanie"
-            android:textSize="120px"
+            android:textSize="80px"
             android:layout_column="0"
             android:layout_row="0"
             android:layout_gravity="center" />
@@ -102,5 +112,7 @@
             android:id="@+id/registerButton"
             android:onClick="onClickRegisterButton"
             android:background="@color/colorPrimary"/>
+        </LinearLayout>
+
     </LinearLayout>
 </GridLayout>

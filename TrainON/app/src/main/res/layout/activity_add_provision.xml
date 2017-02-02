@@ -69,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:entries="@array/sport_activity_list"
                 android:layout_gravity="center"
-                android:id="@+id/add_provision_activity"></Spinner>
+                android:id="@+id/add_provision_activity"
+                android:popupBackground="@android:color/holo_green_dark"></Spinner>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -83,12 +84,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Dodaj"
-            android:onClick="onClickAddProvision"/>
+            android:onClick="onClickAddProvision"
+            android:background="@color/colorPrimaryDark"/>
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Cofnij"
             android:onClick="onClickReturn"
-            android:id="@+id/button" />
+            android:id="@+id/button"
+            android:background="@color/colorGray"
+            />
     </LinearLayout>
 </GridLayout>
