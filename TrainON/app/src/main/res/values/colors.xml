@@ -2,9 +2,13 @@
 <resources>
     <color name="colorPrimary">#3f51b5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorAccent">#fe9834</color>
     <color name="colorGreen">#33cc33</color>
     <color name="colorBlue">#3333ff</color>
     <color name="colorBlack">#000000</color>
     <color name="colorWhite">#ffffff</color>
+    <color name="colorGray">#1f1f1f</color>
+    <color name="aplha">#401f1f1f</color>
+    <color name="editTextGray">#1f1f1f</color>
+
 </resources>

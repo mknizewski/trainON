@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         FileManager.CreateAppFolderIfDosentExists();
 
+
         //new Thread(new waitingToStart()).start();
         //findViewById(R.id.loadingPanel).setVisibility(View.GONE); //wylaczam ladowanie
     }
