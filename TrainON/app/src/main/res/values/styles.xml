@@ -25,7 +25,7 @@
 
     <!-- STYLE FOR ELEMENTS -->
     <style name="button">
-        <item name="android:background">@android:color/holo_green_dark</item>
+        <!--<item name="android:background">@android:color/holo_green_dark</item>-->
         <item name="android:layout_height">42dp</item>
     </style>
 
