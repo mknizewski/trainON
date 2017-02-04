@@ -49,12 +49,14 @@
                 android:layout_margin="10dp">
                 <TextView
                     android:text="Cel: "
-                    android:textSize="20dp"
-                    android:textStyle="bold" />
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:fontFamily="serif"/>
                 <TextView
                     android:text="tutaj wpisz swój cel"
                     android:textSize="16dp"
-                    android:id="@+id/pervision_target"/>
+                    android:id="@+id/pervision_target"
+                    android:fontFamily="serif"/>
             </TableRow>
             <TableRow
                 android:layout_width="wrap_content"
@@ -62,13 +64,15 @@
                 android:layout_margin="10dp">
                 <TextView
                     android:text="Realizacja do: "
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
-                    android:layout_marginRight="10dp"/>
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="serif"/>
                 <TextView
                     android:text="02.12.2017"
                     android:textSize="16dp"
-                    android:id="@+id/pervision_realization"/>
+                    android:id="@+id/pervision_realization"
+                    android:fontFamily="serif"/>
             </TableRow>
 
             <TableRow
@@ -77,13 +81,15 @@
                 android:layout_margin="10dp">
                 <TextView
                     android:text="Aktywność:"
-                    android:textSize="20dp"
+                    android:textSize="18dp"
                     android:textStyle="bold"
+                    android:fontFamily="serif"
                     />
                 <TextView
                     android:text="Bieganie"
                     android:textSize="16dp"
-                    android:id="@+id/pervision_activity"/>
+                    android:id="@+id/pervision_activity"
+                    android:fontFamily="serif"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>
