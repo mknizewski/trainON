@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp"
+                android:background="@drawable/border_radius">
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/open_quotation"
+                    android:layout_gravity="left"
+                    />
+                <TextView
+                    android:id="@+id/sentence"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="40dp"
+                    android:paddingRight="40dp"
+                    android:paddingTop="4dp"
+                    android:paddingBottom="4dp"
+                    android:text="Tutaj będzie cytacik na dziś"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorWhite"
+                    android:fontFamily="serif"
+                    android:lineSpacingExtra="12sp"
+                    android:textStyle="normal|italic"
+                    android:textAllCaps="false" />
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
+                    android:src="@drawable/close_quotation"
+                    android:layout_gravity="right"
+                    />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="30dp"
+                android:padding="10dp"
+                android:background="@drawable/border_radius">
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:text="Czy odbyłeś dzisiejszy trening?"
+                    android:textSize="20dp"
+                    android:layout_gravity="center"
+                    android:textColor="@color/colorWhite"
+                    android:layout_margin="10dp"
+                    android:enabled="false"
+                    android:fontFamily="serif"
+                    android:textAlignment="center" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tutaj nazwa treningu"
+                    android:textSize="18dp"
+                    android:layout_margin="5dp"
+                    android:layout_gravity="center"
+                    android:textStyle="normal|italic"
+                    android:textAlignment="center" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center">
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Tak"
+                        android:textAlignment="center"
+                        style="@style/button"
+                        android:backgroundTint="@android:color/holo_green_dark"/>
+                    <Button
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Nie"
+                        style="@style/button"
+                        android:backgroundTint="@android:color/holo_red_dark"
+                        android:layout_gravity="center"
+                        android:textAlignment="center" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+</GridLayout>

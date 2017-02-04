@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_main"
+            android:icon="@drawable/home"
+            android:title="Główna" />
+        <item
+            android:id="@+id/nav_trening"
+            android:icon="@drawable/exercise"
+            android:title="Plan treningowy" />
+        <item
+            android:id="@+id/nav_stats"
+            android:icon="@drawable/linechart"
+            android:title="Statystyki" />
+        <item
+            android:id="@+id/nav_provisions"
+            android:icon="@drawable/task"
+            android:title="Postanowienia" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/settings"
+            android:title="Ustawienia" />
+    </group>
+
+    <item android:title="Inne">
+        <menu>
+            <item
+                android:id="@+id/nav_authors"
+                android:icon="@drawable/authors"
+                android:title="Autorzy" />
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@drawable/logout"
+                android:title="Wyloguj się" />
+        </menu>
+    </item>
+
+</menu>
