@@ -3,34 +3,58 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_gravity="center">
-        <TextView
-            android:layout_width="match_parent"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="35dp"
+            android:src="@drawable/uwb2"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_gravity="center"
-            android:text="Autorzy:"
-            android:textSize="42dp"
-            android:textColor="@color/colorBlack"
-            android:layout_margin="5dp"
-            android:enabled="false"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Mateusz Kniżewski"
-            android:layout_margin="5dp"
-            android:enabled="false"
-            android:textColor="@color/colorBlack"
-            android:textSize="32dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Piotr Aleksandrowicz"
-            android:layout_margin="5dp"
-            android:enabled="false"
-            android:textColor="@color/colorBlack"
-            android:textSize="32dp"/>
+            android:orientation="vertical"
+            android:background="@color/aplha"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Autorzy:"
+                android:textSize="55px"
+                android:textColor="@color/colorWhite"
+                android:layout_margin="5dp"
+                android:fontFamily="serif"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mateusz Kniżewski"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:enabled="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="40px"
+                android:fontFamily="serif"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Piotr Aleksandrowicz"
+                android:gravity="center"
+                android:layout_margin="5dp"
+                android:fontFamily="serif"
+                android:enabled="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="40px"
+                android:paddingBottom="20dp"
+                android:color="@color/colorWhite"/>
+        </LinearLayout>
     </LinearLayout>
 </GridLayout>

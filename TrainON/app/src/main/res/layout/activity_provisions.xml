@@ -36,7 +36,7 @@
         app:fabSize="mini"
         app:srcCompat="@android:drawable/ic_input_add"
         android:id="@+id/floatingActionButton"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="@color/colorWhite"
         android:layout_gravity="bottom|end"
         android:layout_margin="16dp"/>
 </GridLayout>
