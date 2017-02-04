@@ -12,17 +12,18 @@
     android:columnCount="1"
     android:rowCount="1">
 
-    <!--<RelativeLayout-->
-        <!--android:id="@+id/loadingPanel"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="match_parent"-->
-        <!--android:gravity="center" >-->
+    <RelativeLayout
+        android:id="@+id/loadingPanel"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center" >
 
-        <!--<ProgressBar-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:indeterminate="true" />-->
-    <!--</RelativeLayout>-->
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:indeterminateTint="@android:color/holo_green_light"/>
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_gravity="center"
@@ -45,13 +46,15 @@
             android:layout_marginTop="40dp"
             >
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="Logowanie"
-            android:textSize="80px"
+            android:fontFamily="serif"
+            android:textSize="70px"
             android:layout_column="0"
             android:layout_row="0"
-            android:layout_gravity="center" />
+            android:layout_gravity="center"
+            android:textAlignment="center" />
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +102,7 @@
             android:height="30dp"
             android:id="@+id/loginButton"
             android:onClick="onClickLoginButton"
-            android:background="@color/colorGreen"
+            android:background="@android:color/holo_green_light"
             android:layout_marginBottom="10dp"
             android:layout_marginTop="10dp"/>
         <Button
