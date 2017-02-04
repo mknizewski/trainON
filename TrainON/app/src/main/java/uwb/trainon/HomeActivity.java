@@ -26,6 +26,7 @@ public class HomeActivity extends Fragment
         myView = inflater.inflate(R.layout.activity_home, container, false);
         this.GetSentence();
 
+
         return myView;
     }
 
