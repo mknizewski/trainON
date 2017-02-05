@@ -50,13 +50,9 @@ public class ProvisionsActivity extends Fragment
 
         if (IsAdd)
         {
-            this.IsAdd = false;
+            IsAdd = false;
 
-            getFragmentManager()
-                    .beginTransaction()
-                    .detach(ProvisionsActivity.this)
-                    .attach(ProvisionsActivity.this)
-                    .commit();
+            this.RefreshActivity();
 
             Toast.makeText(
                     myView.getContext(),
@@ -64,6 +60,15 @@ public class ProvisionsActivity extends Fragment
                     Toast.LENGTH_LONG
             ).show();
         }
+    }
+
+    private void RefreshActivity()
+    {
+        getFragmentManager()
+                .beginTransaction()
+                .detach(ProvisionsActivity.this)
+                .attach(ProvisionsActivity.this)
+                .commit();
     }
 
     @Nullable
@@ -136,11 +141,7 @@ public class ProvisionsActivity extends Fragment
                                                 _userManager.User.Login
                                         );
 
-                                        getFragmentManager()
-                                                .beginTransaction()
-                                                .detach(ProvisionsActivity.this)
-                                                .attach(ProvisionsActivity.this)
-                                                .commit();
+                                        RefreshActivity();
 
                                         Toast.makeText(
                                                 myView.getContext(),
