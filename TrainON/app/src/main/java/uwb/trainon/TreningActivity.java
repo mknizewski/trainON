@@ -1,12 +1,15 @@
 package uwb.trainon;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import uwb.trainon.factories.IntentFactory;
 import uwb.trainon.managers.FileManager;
 import uwb.trainon.managers.UserManager;
 
@@ -27,6 +30,7 @@ public class TreningActivity extends Fragment
     {
         this._myView = inflater.inflate(R.layout.activity_trening, container, false);
         this.InitializeManagers();
+        this.InitializeListeners();
 
         return _myView;
     }
@@ -34,5 +38,28 @@ public class TreningActivity extends Fragment
     private void InitializeManagers()
     {
         this._fileManager = FileManager.GetFileManager();
+    }
+
+    private void InitializeListeners()
+    {
+        FloatingActionButton floatingActionButton = (FloatingActionButton) _myView.findViewById(R.id.floatingActionButton);
+        floatingActionButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = IntentFactory.GetIntent(_myView.getContext(), AddTreningActivity.class);
+                intent.putExtra("User", _userManager.User);
+
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void RefreshActivity()
+    {
+        getFragmentManager()
+                .beginTransaction()
+                .detach(TreningActivity.this)
+                .attach(TreningActivity.this)
+                .commit();
     }
 }
