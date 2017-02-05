@@ -24,7 +24,6 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import uwb.trainon.TreningActivity;
 import uwb.trainon.interfaces.IManager;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.models.ProvisionViewModel;

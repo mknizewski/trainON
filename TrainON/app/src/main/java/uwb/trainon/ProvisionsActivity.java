@@ -1,6 +1,8 @@
 package uwb.trainon;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -9,6 +11,7 @@ import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -80,6 +83,42 @@ public class ProvisionsActivity extends Fragment
             activityTextView.setText(provision.Activity);
             dateTextView.setText(provision.Realization.toString());
 
+            Button deleteBtn = (Button) provisonView.findViewById(R.id.delete_pervisions_button);
+            View.OnClickListener deleteBtnListener = new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(myView.getContext());
+                    builder1.setMessage(StringExtensions.DeleteProvisionConfirmation);
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Tak",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Nie",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+            };
+
+            deleteBtn.setOnClickListener(deleteBtnListener);
             pervisionsList.addView(provisonView);
         }
     }

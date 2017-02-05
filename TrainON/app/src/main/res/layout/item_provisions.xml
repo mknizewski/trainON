@@ -17,19 +17,12 @@
         <Button
             android:layout_width="wrap_content"
             android:layout_gravity="right|bottom"
-            android:text="Edycja"
-            android:layout_marginRight="1dp"
-            style="@style/button"
-            android:backgroundTint="@android:color/holo_green_dark"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_gravity="right|bottom"
-            android:id="@+id/settings_pervisions_button"
+            android:id="@+id/delete_pervisions_button"
             android:text="Usuń"
             android:layout_marginRight="7dp"
             style="@style/button"
-            android:backgroundTint="@android:color/holo_green_dark"/>
+            android:backgroundTint="@android:color/holo_green_dark"
+            android:onClick="onClickDeleteProvision"/>
     </LinearLayout>
 
     <LinearLayout
