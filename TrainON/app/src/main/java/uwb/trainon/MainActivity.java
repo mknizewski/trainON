@@ -54,6 +54,8 @@ public class MainActivity extends AppCompatActivity
                 panel_login.startAnimation(animation_fadein);
             }
         }, 3000);
+
+        setTitle("TrainON");
     }
 
     public void onClickLoginButton(View view)

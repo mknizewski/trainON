@@ -55,6 +55,8 @@ public class Main2Activity extends AppCompatActivity
         this.GetUser();
         this.InitializeView(navigationView.getHeaderView(0));
         this.GetHomeActivity();
+
+        setTitle("Strona główna");
     }
 
     private void GetHomeActivity()
@@ -119,6 +121,7 @@ public class Main2Activity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, homeActivity)
                     .commit();
+            setTitle("Strona główna");
         }
         if (id == R.id.nav_trening)
         {
@@ -128,10 +131,11 @@ public class Main2Activity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, treningActivity)
                     .commit();
+            setTitle("Plan treningowy");
         }
         else if (id == R.id.nav_stats)
         {
-
+            setTitle("Statystyki");
         }
         else if (id == R.id.nav_provisions)
         {
@@ -141,22 +145,26 @@ public class Main2Activity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, provisionsActivity)
                     .commit();
+            setTitle("Postanowienia");
         }
         else if (id == R.id.nav_settings)
         {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, new SettingsActivity())
                     .commit();
+            setTitle("Ustawienia");
         }
         else if (id == R.id.nav_authors)
         {
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, new AuthorsActivity())
                     .commit();
+            setTitle("Autorzy");
         }
         else if (id == R.id.nav_logout)
         {
             AlertDialogExtension.LogOutAlert(this);
+            setTitle("TrainON");
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

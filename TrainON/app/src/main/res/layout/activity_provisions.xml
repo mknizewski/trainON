@@ -17,15 +17,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="top"
-            android:id="@+id/provisions_list">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Twoje postanowienia"
-                android:textSize="32dp"
-                android:layout_gravity="center"
-                android:layout_margin="5dp"/>
-        </LinearLayout>
+            android:id="@+id/provisions_list"></LinearLayout>
     </ScrollView>
     <android.support.design.widget.FloatingActionButton
         android:layout_column="0"
