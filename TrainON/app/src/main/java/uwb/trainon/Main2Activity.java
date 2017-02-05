@@ -124,7 +124,12 @@ public class Main2Activity extends AppCompatActivity
         }
         else if (id == R.id.nav_stats)
         {
+            StatsActivity statsActivity = new StatsActivity();
+            statsActivity.SetUserManager(_userManager);
 
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_main2, statsActivity)
+                    .commit();
         }
         else if (id == R.id.nav_provisions)
         {

@@ -55,6 +55,39 @@ public class FileManager implements IManager
         try
         {
             List<StatsViewModel> statsViewModelList = new ArrayList<>();
+            String statsPath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlStatsName;
+            File provisionFile = new File(statsPath);
+            FileInputStream inputStream = new FileInputStream(provisionFile);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+
+            char[] inputBuffer = new char[inputStream.available()];
+            streamReader.read(inputBuffer);
+
+            String data = new String(inputBuffer)
+                    .replace("\n", "")
+                    .replace("\r", "")
+                    .replace(" ", "");
+
+            streamReader.close();
+            inputStream.close();
+
+            InputStream in = new ByteArrayInputStream(data.getBytes(StringExtensions.UTF));
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(in);
+
+            NodeList root = document.getElementsByTagName("stats");
+            NodeList items = root.item(0).getChildNodes();
+
+            for (int i = 0; i < items.getLength(); i++)
+            {
+                StatsViewModel statsViewModel = new StatsViewModel();
+
+                statsViewModel.Day = Date.valueOf(items.item(0).getTextContent());
+                statsViewModel.ActivityDone = Boolean.parseBoolean(items.item(1).getTextContent());
+
+                statsViewModelList.add(statsViewModel);
+            }
 
             return statsViewModelList;
         }
