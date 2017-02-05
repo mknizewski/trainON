@@ -113,7 +113,8 @@
                     android:text="Komentarz komentatorski"
                     android:textSize="16dp"
                     android:id="@+id/trening_commnent"
-                    android:fontFamily="serif"/>
+                    android:fontFamily="serif"
+                    android:inputType="textMultiLine"/>
             </TableRow>
         </TableLayout>
     </LinearLayout>
