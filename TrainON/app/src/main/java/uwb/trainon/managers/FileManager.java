@@ -80,7 +80,12 @@ public class FileManager implements IManager
         return treningViewModelList;
     }
 
-    public void SaveTreningByDay(TreningViewModel viewModel)
+    public boolean CheckIfExistsTrening(String day, String login)
+    {
+        return false;
+    }
+
+    public void SaveTreningByDay(TreningViewModel viewModel, String login)
             throws IOException
     {
 

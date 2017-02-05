@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import uwb.trainon.factories.IntentFactory;
 import uwb.trainon.managers.FileManager;
@@ -19,9 +20,29 @@ public class TreningActivity extends Fragment
     private FileManager _fileManager;
     private UserManager _userManager;
 
+    public static boolean IsAdd = false;
+
     public void SetUserManager(UserManager userManager)
     {
         this._userManager = userManager;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (IsAdd)
+        {
+            IsAdd = false;
+
+            this.RefreshActivity();
+
+            Toast.makeText(
+                    _myView.getContext(),
+                    "Poprawnie dodano trening.",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
     }
 
     @Nullable
