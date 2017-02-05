@@ -7,12 +7,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 
@@ -28,14 +30,40 @@ import uwb.trainon.managers.FileManager;
 import uwb.trainon.managers.UserManager;
 import uwb.trainon.models.ProvisionViewModel;
 
+import static uwb.trainon.R.id.button;
+
 public class ProvisionsActivity extends Fragment
 {
     public View myView;
     private UserManager _userManager;
     private FileManager _fileManager;
 
+    public static boolean IsAdd = false;
+
     public void set_userManager(UserManager _userManager) {
         this._userManager = _userManager;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (IsAdd)
+        {
+            this.IsAdd = false;
+
+            getFragmentManager()
+                    .beginTransaction()
+                    .detach(ProvisionsActivity.this)
+                    .attach(ProvisionsActivity.this)
+                    .commit();
+
+            Toast.makeText(
+                    myView.getContext(),
+                    "Poprawnie dodano postanowienie.",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
     }
 
     @Nullable
@@ -107,6 +135,18 @@ public class ProvisionsActivity extends Fragment
                                                 provisionViewModelList.indexOf(provision),
                                                 _userManager.User.Login
                                         );
+
+                                        getFragmentManager()
+                                                .beginTransaction()
+                                                .detach(ProvisionsActivity.this)
+                                                .attach(ProvisionsActivity.this)
+                                                .commit();
+
+                                        Toast.makeText(
+                                                myView.getContext(),
+                                                "Poprawnie usunięto postanowienie.",
+                                                Toast.LENGTH_LONG
+                                        ).show();
                                     }
                                     catch (Exception ex)
                                     {
