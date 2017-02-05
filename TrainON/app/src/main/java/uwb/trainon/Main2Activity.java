@@ -130,6 +130,7 @@ public class Main2Activity extends AppCompatActivity
         {
             StatsActivity statsActivity = new StatsActivity();
             statsActivity.SetUserManager(_userManager);
+
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, statsActivity)
                     .commit();

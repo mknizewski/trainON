@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,7 +52,7 @@ public class FileManager implements IManager
         this.CreateProfileXml(registerMap);
     }
 
-    private List<StatsViewModel> GetStats(String login)
+    public List<StatsViewModel> GetStats(String login)
     {
         try
         {
@@ -97,13 +99,14 @@ public class FileManager implements IManager
         }
     }
 
-    private void SaveStats(String login, StatsViewModel viewModel)
+    public void SaveStats(String login, StatsViewModel viewModel)
             throws IOException
     {
         String userFolder = FileManager.GetAppFolderPath() + login;
         String statsPath = userFolder + StringExtensions.Slash + XmlStatsName;
         File statsFile = new File(statsPath);
         List<StatsViewModel> statsViewModelList = new ArrayList<>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         if (statsFile.exists())
         {
@@ -123,7 +126,7 @@ public class FileManager implements IManager
         xmlSerializer.startTag(null, "stats");
 
         xmlSerializer.startTag(null, "day");
-        xmlSerializer.text(viewModel.Day.toString());
+        xmlSerializer.text(dateFormat.format(viewModel.Day));
         xmlSerializer.endTag(null, "day");
 
         xmlSerializer.startTag(null, "activity");
@@ -133,7 +136,7 @@ public class FileManager implements IManager
         for (StatsViewModel statsViewModel : statsViewModelList)
         {
             xmlSerializer.startTag(null, "day");
-            xmlSerializer.text(statsViewModel.Day.toString());
+            xmlSerializer.text(dateFormat.format(statsViewModel.Day));
             xmlSerializer.endTag(null, "day");
 
             xmlSerializer.startTag(null, "activity");

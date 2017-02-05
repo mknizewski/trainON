@@ -48,55 +48,59 @@
             </LinearLayout>
 
 
-            <LinearLayout
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="30dp"
+            android:padding="10dp"
+            android:background="@drawable/border_radius"
+            android:id="@+id/trening">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:text="Czy odbyłeś dzisiejszy trening?"
+                android:textSize="20dp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorWhite"
+                android:layout_margin="10dp"
+                android:enabled="false"
+                android:fontFamily="serif"
+                android:textAlignment="center"
+                android:textStyle="normal|bold" />
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_margin="30dp"
-                android:padding="10dp"
-                android:background="@drawable/border_radius">
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:text="Czy odbyłeś dzisiejszy trening?"
-                    android:textSize="20dp"
-                    android:layout_gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:layout_margin="10dp"
-                    android:enabled="false"
-                    android:fontFamily="serif"
-                    android:textAlignment="center"
-                    android:textStyle="normal|bold" />
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Tutaj nazwa treningu"
-                    android:textSize="18dp"
-                    android:layout_margin="5dp"
-                    android:layout_gravity="center"
-                    android:textStyle="normal|italic"
-                    android:textAlignment="center" />
-                <LinearLayout
+                android:text="Tutaj nazwa treningu"
+                android:textSize="18dp"
+                android:layout_margin="5dp"
+                android:layout_gravity="center"
+                android:textStyle="normal|italic"
+                android:textAlignment="center"
+                android:id="@+id/trening_name"/>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center">
+                <Button
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_gravity="center">
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Tak"
-                        android:textAlignment="center"
-                        style="@style/button"
-                        android:backgroundTint="@android:color/holo_green_dark"/>
-                    <Button
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Nie"
-                        style="@style/button"
-                        android:backgroundTint="@android:color/holo_red_dark"
-                        android:layout_gravity="center"
-                        android:textAlignment="center" />
-                </LinearLayout>
+                    android:text="Tak"
+                    android:textAlignment="center"
+                    style="@style/button"
+                    android:backgroundTint="@android:color/holo_green_dark"
+                    android:id="@+id/button_activity_yes"/>
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nie"
+                    style="@style/button"
+                    android:backgroundTint="@android:color/holo_red_dark"
+                    android:layout_gravity="center"
+                    android:textAlignment="center"
+                    android:id="@+id/button_activity_no"/>
             </LinearLayout>
         </LinearLayout>
+    </LinearLayout>
 </GridLayout>
