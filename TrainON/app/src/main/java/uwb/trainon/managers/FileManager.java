@@ -86,6 +86,57 @@ public class FileManager implements IManager
 
     }
 
+    public void DeleteProvision(int index, String login)
+            throws IOException, ParserConfigurationException,
+                   SAXException
+    {
+        List<ProvisionViewModel> provisionViewModelList = GetProvisions(login);
+        provisionViewModelList.remove(index);
+
+        String userFolder = FileManager.GetAppFolderPath() + login;
+        String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
+        File provison = new File(provisionFile);
+
+        if (provison.exists())
+            provison.delete();
+
+        provison.createNewFile();
+
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        FileOutputStream fileOutputStream = new FileOutputStream(provison, false);
+
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
+        xmlSerializer.startDocument(null, Boolean.TRUE);
+        xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+        xmlSerializer.startTag(null, "provisions");
+
+        for (ProvisionViewModel viewModel : provisionViewModelList)
+        {
+            xmlSerializer.startTag(null, "provision");
+
+            xmlSerializer.startTag(null, "target");
+            xmlSerializer.text(viewModel.Target);
+            xmlSerializer.endTag(null, "target");
+
+            xmlSerializer.startTag(null, "date");
+            xmlSerializer.text(viewModel.Realization.toString());
+            xmlSerializer.endTag(null, "date");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(viewModel.Activity);
+            xmlSerializer.endTag(null, "activity");
+
+            xmlSerializer.endTag(null, "provision");
+        }
+        xmlSerializer.endTag(null, "provisions");
+
+        xmlSerializer.endDocument();
+        xmlSerializer.flush();
+
+        fileOutputStream.flush();
+        fileOutputStream.close();
+    }
+
     public List<ProvisionViewModel> GetProvisions(String login)
             throws IOException, ParserConfigurationException,
                    SAXException

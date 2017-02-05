@@ -66,13 +66,16 @@ public class ProvisionsActivity extends Fragment
         }
     }
 
-    private void InitializePervisonList(LayoutInflater inflater)
+    private void InitializePervisonList(final LayoutInflater inflater)
             throws IOException, SAXException, ParserConfigurationException
     {
         LinearLayout pervisionsList = (LinearLayout) myView.findViewById(R.id.provisions_list);
 
-        List<ProvisionViewModel> provisionViewModelList = _fileManager.GetProvisions(_userManager.User.Login);
-        for (ProvisionViewModel provision : provisionViewModelList)
+        if (pervisionsList.getChildCount() != 0)
+            pervisionsList.removeAllViews();
+
+        final List<ProvisionViewModel> provisionViewModelList = _fileManager.GetProvisions(_userManager.User.Login);
+        for (final ProvisionViewModel provision : provisionViewModelList)
         {
             View provisonView = inflater.inflate(R.layout.item_provisions, pervisionsList, false);
             TextView targetTextView = (TextView) provisonView.findViewById(R.id.pervision_target);
@@ -99,7 +102,22 @@ public class ProvisionsActivity extends Fragment
                             {
                                 public void onClick(DialogInterface dialog, int id)
                                 {
-                                    dialog.cancel();
+                                    try
+                                    {
+                                        _fileManager.DeleteProvision(
+                                                provisionViewModelList.indexOf(provision),
+                                                _userManager.User.Login);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        AlertDialogExtension.ShowAlert(
+                                                ex.getMessage(),
+                                                StringExtensions.ErrorTitle,
+                                                myView.getContext()
+                                        );
+                                    }
+
+                                    dialog.dismiss();
                                 }
                             });
 
