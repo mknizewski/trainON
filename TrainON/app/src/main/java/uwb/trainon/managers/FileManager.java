@@ -28,6 +28,7 @@ import uwb.trainon.interfaces.IManager;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.models.ProvisionViewModel;
 import uwb.trainon.models.RegisterViewModel;
+import uwb.trainon.models.StatsViewModel;
 import uwb.trainon.models.TreningViewModel;
 
 public class FileManager implements IManager
@@ -49,28 +50,71 @@ public class FileManager implements IManager
         this.CreateProfileXml(registerMap);
     }
 
-    private void CreateProvisionsXml(Map<String, String> registerMap)
+    private List<StatsViewModel> GetStats(String login)
+    {
+        try
+        {
+            List<StatsViewModel> statsViewModelList = new ArrayList<>();
+
+            return statsViewModelList;
+        }
+        catch (Exception ex)
+        {
+            return new ArrayList<>();
+        }
+    }
+
+    private void SaveStats(String login, StatsViewModel viewModel)
             throws IOException
     {
-        String login = registerMap.get("Login").toString();
         String userFolder = FileManager.GetAppFolderPath() + login;
-        String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
+        String statsPath = userFolder + StringExtensions.Slash + XmlStatsName;
+        File statsFile = new File(statsPath);
+        List<StatsViewModel> statsViewModelList = new ArrayList<>();
 
-        File provision = new File(provisionFile);
-        provision.createNewFile();
+        if (statsFile.exists())
+        {
+            statsViewModelList = GetStats(login);
+            statsFile.delete();
+        }
+
+        statsFile.createNewFile();
 
         XmlSerializer xmlSerializer = Xml.newSerializer();
-        FileOutputStream outputStream = new FileOutputStream(provision, false);
+        FileOutputStream fileOutputStream = new FileOutputStream(statsFile, false);
 
-        xmlSerializer.setOutput(outputStream, StringExtensions.UTF);
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
         xmlSerializer.startDocument(null, Boolean.TRUE);
         xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+
+        xmlSerializer.startTag(null, "stats");
+
+        xmlSerializer.startTag(null, "day");
+        xmlSerializer.text(viewModel.Day.toString());
+        xmlSerializer.endTag(null, "day");
+
+        xmlSerializer.startTag(null, "activity");
+        xmlSerializer.text(String.valueOf(viewModel.ActivityDone));
+        xmlSerializer.endTag(null, "activity");
+
+        for (StatsViewModel statsViewModel : statsViewModelList)
+        {
+            xmlSerializer.startTag(null, "day");
+            xmlSerializer.text(statsViewModel.Day.toString());
+            xmlSerializer.endTag(null, "day");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(String.valueOf(statsViewModel.ActivityDone));
+            xmlSerializer.endTag(null, "activity");
+        }
+
+        xmlSerializer.endTag(null, "stats");
 
         xmlSerializer.endDocument();
         xmlSerializer.flush();
 
-        outputStream.flush();
-        outputStream.close();
+        fileOutputStream.flush();
+        fileOutputStream.close();
     }
 
     public List<TreningViewModel> GetUserTrening(String login)
