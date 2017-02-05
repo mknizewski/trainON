@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_column="1"
+    android:layout_row="2"
+    android:layout_margin="10dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_row="0"
+        android:layout_column="0"
+        android:background="@android:color/holo_green_light"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="left|center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Poniedziałek"
+                android:layout_marginLeft="10dp"
+                android:textSize="24dp"
+                android:id="@+id/trening_header_day"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_gravity="right|bottom"
+                android:id="@+id/delete_trening_button"
+                android:text="Usuń"
+                android:layout_marginRight="7dp"
+                style="@style/button"
+                android:backgroundTint="@android:color/holo_green_dark"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/border"
+        android:padding="10dp">
+
+        <TableLayout
+            android:id="@+id/tableLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <TextView
+                    android:text="Aktywność: "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="serif"/>
+                <TextView
+                    android:text="Bieganie"
+                    android:textSize="16dp"
+                    android:id="@+id/trening_activity"
+                    android:fontFamily="serif"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <TextView
+                    android:text="Pora dnia: "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="serif"/>
+                <TextView
+                    android:text="Wieczór (18.00 - 0.00)"
+                    android:textSize="16dp"
+                    android:id="@+id/trening_day"
+                    android:fontFamily="serif"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <TextView
+                    android:text="Godzin: "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="serif"/>
+                <TextView
+                    android:text="5 h"
+                    android:textSize="16dp"
+                    android:id="@+id/trening_hours"
+                    android:fontFamily="serif"/>
+            </TableRow>
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp">
+                <TextView
+                    android:text="Komentarz: "
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp"
+                    android:fontFamily="serif"/>
+                <TextView
+                    android:text="Komentarz komentatorski"
+                    android:textSize="16dp"
+                    android:id="@+id/trening_commnent"
+                    android:fontFamily="serif"
+                    android:inputType="textMultiLine"/>
+            </TableRow>
+        </TableLayout>
+    </LinearLayout>
+</GridLayout>

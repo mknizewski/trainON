@@ -22,7 +22,7 @@
             android:layout_marginRight="7dp"
             style="@style/button"
             android:backgroundTint="@android:color/holo_green_dark"
-            android:onClick="onClickDeleteProvision"/>
+            android:visibility="invisible"/>
     </LinearLayout>
 
     <LinearLayout
@@ -41,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
                 <TextView
-                    android:text="Cel: "
+                    android:text="Data: "
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:fontFamily="serif"/>
                 <TextView
-                    android:text="tutaj wpisz swój cel"
+                    android:text="1970-12-06"
                     android:textSize="16dp"
-                    android:id="@+id/pervision_target"
+                    android:id="@+id/stats_date"
                     android:fontFamily="serif"/>
             </TableRow>
             <TableRow
@@ -56,34 +56,18 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp">
                 <TextView
-                    android:text="Realizacja do: "
+                    android:text="Ćwiczone: "
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_marginRight="10dp"
                     android:fontFamily="serif"/>
                 <TextView
-                    android:text="02.12.2017"
+                    android:text="Jeszcze jak"
                     android:textSize="16dp"
-                    android:id="@+id/pervision_realization"
+                    android:id="@+id/stats_status"
                     android:fontFamily="serif"/>
             </TableRow>
 
-            <TableRow
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-                <TextView
-                    android:text="Aktywność:"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:fontFamily="serif"
-                    />
-                <TextView
-                    android:text="Bieganie"
-                    android:textSize="16dp"
-                    android:id="@+id/pervision_activity"
-                    android:fontFamily="serif"/>
-            </TableRow>
         </TableLayout>
     </LinearLayout>
 </GridLayout>

@@ -92,18 +92,11 @@ public class Main2Activity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main2, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -135,6 +128,12 @@ public class Main2Activity extends AppCompatActivity
         }
         else if (id == R.id.nav_stats)
         {
+            StatsActivity statsActivity = new StatsActivity();
+            statsActivity.SetUserManager(_userManager);
+
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_main2, statsActivity)
+                    .commit();
             setTitle("Statystyki");
         }
         else if (id == R.id.nav_provisions)
@@ -146,13 +145,6 @@ public class Main2Activity extends AppCompatActivity
                     .replace(R.id.content_main2, provisionsActivity)
                     .commit();
             setTitle("Postanowienia");
-        }
-        else if (id == R.id.nav_settings)
-        {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_main2, new SettingsActivity())
-                    .commit();
-            setTitle("Ustawienia");
         }
         else if (id == R.id.nav_authors)
         {

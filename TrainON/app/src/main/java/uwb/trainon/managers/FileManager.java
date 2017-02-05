@@ -16,6 +16,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -24,11 +26,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 
-import uwb.trainon.TreningActivity;
 import uwb.trainon.interfaces.IManager;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.models.ProvisionViewModel;
 import uwb.trainon.models.RegisterViewModel;
+import uwb.trainon.models.StatsViewModel;
 import uwb.trainon.models.TreningViewModel;
 
 public class FileManager implements IManager
@@ -37,6 +39,7 @@ public class FileManager implements IManager
     private static final String XmlProfileName = "profile.xml";
     private static final String XmlProvisionsName = "provisions.xml";
     private static final String XmlTreningName = "trening.xml";
+    private static final String XmlStatsName = "stats.xml";
 
     public static FileManager GetFileManager()
     {
@@ -47,44 +50,363 @@ public class FileManager implements IManager
             throws IOException
     {
         this.CreateProfileXml(registerMap);
-        //this.CreateProvisionsXml(registerMap);
     }
 
-    private void CreateProvisionsXml(Map<String, String> registerMap)
+    public List<StatsViewModel> GetStats(String login)
+    {
+        try
+        {
+            List<StatsViewModel> statsViewModelList = new ArrayList<>();
+            String statsPath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlStatsName;
+            File provisionFile = new File(statsPath);
+            FileInputStream inputStream = new FileInputStream(provisionFile);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
+
+            char[] inputBuffer = new char[inputStream.available()];
+            streamReader.read(inputBuffer);
+
+            String data = new String(inputBuffer)
+                    .replace("\n", "")
+                    .replace("\r", "")
+                    .replace(" ", "");
+
+            streamReader.close();
+            inputStream.close();
+
+            InputStream in = new ByteArrayInputStream(data.getBytes(StringExtensions.UTF));
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(in);
+
+            NodeList root = document.getElementsByTagName("stats");
+            NodeList items = root.item(0).getChildNodes();
+
+            for (int i = 0; i < items.getLength(); i++)
+            {
+                StatsViewModel statsViewModel = new StatsViewModel();
+
+                statsViewModel.Day = Date.valueOf(items.item(0).getTextContent());
+                statsViewModel.ActivityDone = Boolean.parseBoolean(items.item(1).getTextContent());
+
+                statsViewModelList.add(statsViewModel);
+            }
+
+            return statsViewModelList;
+        }
+        catch (Exception ex)
+        {
+            return new ArrayList<>();
+        }
+    }
+
+    public void SaveStats(String login, StatsViewModel viewModel)
             throws IOException
     {
-        String login = registerMap.get("Login").toString();
         String userFolder = FileManager.GetAppFolderPath() + login;
-        String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
+        String statsPath = userFolder + StringExtensions.Slash + XmlStatsName;
+        File statsFile = new File(statsPath);
+        List<StatsViewModel> statsViewModelList = new ArrayList<>();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        File provision = new File(provisionFile);
-        provision.createNewFile();
+        if (statsFile.exists())
+        {
+            statsViewModelList = GetStats(login);
+            statsFile.delete();
+        }
+
+        statsFile.createNewFile();
 
         XmlSerializer xmlSerializer = Xml.newSerializer();
-        FileOutputStream outputStream = new FileOutputStream(provision, false);
+        FileOutputStream fileOutputStream = new FileOutputStream(statsFile, false);
 
-        xmlSerializer.setOutput(outputStream, StringExtensions.UTF);
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
         xmlSerializer.startDocument(null, Boolean.TRUE);
         xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+
+        xmlSerializer.startTag(null, "stats");
+
+        xmlSerializer.startTag(null, "day");
+        xmlSerializer.text(dateFormat.format(viewModel.Day));
+        xmlSerializer.endTag(null, "day");
+
+        xmlSerializer.startTag(null, "activity");
+        xmlSerializer.text(String.valueOf(viewModel.ActivityDone));
+        xmlSerializer.endTag(null, "activity");
+
+        for (StatsViewModel statsViewModel : statsViewModelList)
+        {
+            xmlSerializer.startTag(null, "day");
+            xmlSerializer.text(dateFormat.format(statsViewModel.Day));
+            xmlSerializer.endTag(null, "day");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(String.valueOf(statsViewModel.ActivityDone));
+            xmlSerializer.endTag(null, "activity");
+        }
+
+        xmlSerializer.endTag(null, "stats");
 
         xmlSerializer.endDocument();
         xmlSerializer.flush();
 
-        outputStream.flush();
-        outputStream.close();
+        fileOutputStream.flush();
+        fileOutputStream.close();
     }
 
     public List<TreningViewModel> GetUserTrening(String login)
     {
-        List<TreningViewModel> treningViewModelList = new ArrayList<>();
+        try
+        {
+            List<TreningViewModel> treningViewModelList = new ArrayList<>();
+            String treningPath = FileManager.GetAppFolderPath() + login + StringExtensions.Slash + XmlTreningName;
+            File treningFile = new File(treningPath);
+            FileInputStream inputStream = new FileInputStream(treningFile);
+            InputStreamReader streamReader = new InputStreamReader(inputStream);
 
-        return treningViewModelList;
+            char[] inputBuffer = new char[inputStream.available()];
+            streamReader.read(inputBuffer);
+
+            String data = new String(inputBuffer)
+                    .replace("\n", "")
+                    .replace("\r", "")
+                    .replace(" ", "");
+
+            streamReader.close();
+            inputStream.close();
+
+            InputStream in = new ByteArrayInputStream(data.getBytes(StringExtensions.UTF));
+            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+            DocumentBuilder db = dbf.newDocumentBuilder();
+            Document document = db.parse(in);
+
+            NodeList root = document.getElementsByTagName("trening");
+            NodeList items = root.item(0).getChildNodes();
+
+            for (int i = 0; i < items.getLength(); i++)
+            {
+                NodeList nodeList = items.item(i).getChildNodes();
+                TreningViewModel treningViewModel = new TreningViewModel();
+
+                treningViewModel.Day = nodeList.item(0).getTextContent();
+                treningViewModel.Activity = nodeList.item(1).getTextContent();
+                treningViewModel.Time = nodeList.item(2).getTextContent();
+                treningViewModel.Hours = Double.parseDouble(nodeList.item(3).getTextContent());
+                treningViewModel.Comment = nodeList.item(4).getTextContent();
+
+                treningViewModelList.add(treningViewModel);
+            }
+
+            return treningViewModelList;
+        }
+        catch (Exception ex)
+        {
+            return new ArrayList<>();
+        }
     }
 
-    public void SaveTreningByDay(TreningViewModel viewModel)
+    public boolean CheckIfExistsTrening(String day, String login)
+    {
+        List<TreningViewModel> treningViewModelList = GetUserTrening(login);
+
+        for (TreningViewModel viewModel : treningViewModelList)
+        {
+            if (viewModel.Day.equals(day))
+                return true;
+        }
+
+        return false;
+    }
+
+    public void SaveTreningByDay(TreningViewModel viewModel, String login)
             throws IOException
     {
+        String userFolder = FileManager.GetAppFolderPath() + login;
+        String treningFilePath = userFolder + StringExtensions.Slash + XmlTreningName;
+        File treningFile = new File(treningFilePath);
+        List<TreningViewModel> treningViewModelList = new ArrayList<>();
 
+        if (treningFile.exists())
+        {
+            treningViewModelList = GetUserTrening(login);
+            treningFile.delete();
+        }
+
+        treningFile.createNewFile();
+
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        FileOutputStream fileOutputStream = new FileOutputStream(treningFilePath, false);
+
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
+        xmlSerializer.startDocument(null, Boolean.TRUE);
+        xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+
+        xmlSerializer.startTag(null, "trening");
+
+        xmlSerializer.startTag(null, "day");
+        xmlSerializer.startTag(null, "dayname");
+        xmlSerializer.text(viewModel.Day);
+        xmlSerializer.endTag(null, "dayname");
+
+        xmlSerializer.startTag(null, "activity");
+        xmlSerializer.text(viewModel.Activity);
+        xmlSerializer.endTag(null, "activity");
+
+        xmlSerializer.startTag(null, "time");
+        xmlSerializer.text(viewModel.Time);
+        xmlSerializer.endTag(null, "time");
+
+        xmlSerializer.startTag(null, "hours");
+        xmlSerializer.text(String.valueOf(viewModel.Hours));
+        xmlSerializer.endTag(null, "hours");
+
+        xmlSerializer.startTag(null, "comment");
+        xmlSerializer.text(viewModel.Comment);
+        xmlSerializer.endTag(null, "comment");
+        xmlSerializer.endTag(null, "day");
+
+        for (TreningViewModel treningViewModel : treningViewModelList)
+        {
+            xmlSerializer.startTag(null, "day");
+            xmlSerializer.startTag(null, "dayname");
+            xmlSerializer.text(treningViewModel.Day);
+            xmlSerializer.endTag(null, "dayname");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(treningViewModel.Activity);
+            xmlSerializer.endTag(null, "activity");
+
+            xmlSerializer.startTag(null, "time");
+            xmlSerializer.text(treningViewModel.Time);
+            xmlSerializer.endTag(null, "time");
+
+            xmlSerializer.startTag(null, "hours");
+            xmlSerializer.text(String.valueOf(treningViewModel.Hours));
+            xmlSerializer.endTag(null, "hours");
+
+            xmlSerializer.startTag(null, "comment");
+            xmlSerializer.text(treningViewModel.Comment);
+            xmlSerializer.endTag(null, "comment");
+            xmlSerializer.endTag(null, "day");
+        }
+
+        xmlSerializer.endTag(null, "trening");
+
+        xmlSerializer.endDocument();
+        xmlSerializer.flush();
+
+        fileOutputStream.flush();
+        fileOutputStream.close();
+    }
+
+    public void DeleteTrening(int index, String login)
+        throws IOException, ParserConfigurationException,
+               SAXException
+    {
+        List<TreningViewModel> treningViewModelList = GetUserTrening(login);
+
+        treningViewModelList.remove(index);
+
+        String userFolder = FileManager.GetAppFolderPath() + login;
+        String treningPath = userFolder + StringExtensions.Slash + XmlTreningName;
+        File treningFile = new File(treningPath);
+
+        if (treningFile.exists())
+            treningFile.delete();
+
+        treningFile.createNewFile();
+
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        FileOutputStream fileOutputStream = new FileOutputStream(treningPath, false);
+
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
+        xmlSerializer.startDocument(null, Boolean.TRUE);
+        xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+
+        xmlSerializer.startTag(null, "trening");
+
+        for (TreningViewModel treningViewModel : treningViewModelList)
+        {
+            xmlSerializer.startTag(null, "day");
+            xmlSerializer.startTag(null, "dayname");
+            xmlSerializer.text(treningViewModel.Day);
+            xmlSerializer.endTag(null, "dayname");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(treningViewModel.Activity);
+            xmlSerializer.endTag(null, "activity");
+
+            xmlSerializer.startTag(null, "time");
+            xmlSerializer.text(treningViewModel.Time);
+            xmlSerializer.endTag(null, "time");
+
+            xmlSerializer.startTag(null, "hours");
+            xmlSerializer.text(String.valueOf(treningViewModel.Hours));
+            xmlSerializer.endTag(null, "hours");
+
+            xmlSerializer.startTag(null, "comment");
+            xmlSerializer.text(treningViewModel.Comment);
+            xmlSerializer.endTag(null, "comment");
+            xmlSerializer.endTag(null, "day");
+        }
+
+        xmlSerializer.endTag(null, "trening");
+
+        xmlSerializer.endDocument();
+        xmlSerializer.flush();
+
+        fileOutputStream.flush();
+        fileOutputStream.close();
+    }
+
+    public void DeleteProvision(int index, String login)
+            throws IOException, ParserConfigurationException,
+                   SAXException
+    {
+        List<ProvisionViewModel> provisionViewModelList = GetProvisions(login);
+        provisionViewModelList.remove(index);
+
+        String userFolder = FileManager.GetAppFolderPath() + login;
+        String provisionFile = userFolder + StringExtensions.Slash + XmlProvisionsName;
+        File provison = new File(provisionFile);
+
+        if (provison.exists())
+            provison.delete();
+
+        provison.createNewFile();
+
+        XmlSerializer xmlSerializer = Xml.newSerializer();
+        FileOutputStream fileOutputStream = new FileOutputStream(provison, false);
+
+        xmlSerializer.setOutput(fileOutputStream, StringExtensions.UTF);
+        xmlSerializer.startDocument(null, Boolean.TRUE);
+        xmlSerializer.setFeature(StringExtensions.XmlFeature, true);
+        xmlSerializer.startTag(null, "provisions");
+
+        for (ProvisionViewModel viewModel : provisionViewModelList)
+        {
+            xmlSerializer.startTag(null, "provision");
+
+            xmlSerializer.startTag(null, "target");
+            xmlSerializer.text(viewModel.Target);
+            xmlSerializer.endTag(null, "target");
+
+            xmlSerializer.startTag(null, "date");
+            xmlSerializer.text(viewModel.Realization.toString());
+            xmlSerializer.endTag(null, "date");
+
+            xmlSerializer.startTag(null, "activity");
+            xmlSerializer.text(viewModel.Activity);
+            xmlSerializer.endTag(null, "activity");
+
+            xmlSerializer.endTag(null, "provision");
+        }
+        xmlSerializer.endTag(null, "provisions");
+
+        xmlSerializer.endDocument();
+        xmlSerializer.flush();
+
+        fileOutputStream.flush();
+        fileOutputStream.close();
     }
 
     public List<ProvisionViewModel> GetProvisions(String login)

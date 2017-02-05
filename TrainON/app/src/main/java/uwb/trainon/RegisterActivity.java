@@ -4,6 +4,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -78,6 +79,10 @@ public class RegisterActivity extends AppCompatActivity
 
     private void SwitchActivityToMain()
     {
-
+        Toast.makeText(
+                RegisterActivity.this,
+                "Poprawnie zarejestrowano nowe konto.",
+                Toast.LENGTH_LONG
+        ).show();
     }
 }

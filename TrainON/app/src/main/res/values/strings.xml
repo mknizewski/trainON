@@ -103,6 +103,23 @@
         <item>Sporty zimowe</item>
     </string-array>
 
+    <string-array name="trening_days">
+        <item>Poniedziałek</item>
+        <item>Wtorek</item>
+        <item>Środa</item>
+        <item>Czwartek</item>
+        <item>Piątek</item>
+        <item>Sobota</item>
+        <item>Niedziela</item>
+    </string-array>
+
+    <string-array name="trening_times">
+        <item>Rano (6.00 - 12.00)</item>
+        <item>Południe (12.00 - 18.00)</item>
+        <item>Wieczór (18.00 - 24.00)</item>
+        <item>Noc (24.00 - 6.00)</item>
+    </string-array>
+
     <string-array name="multi_select_list_preference_default_value" />
 
     <string name="pref_title_system_sync_settings">System sync settings</string>

@@ -1,16 +1,20 @@
 package uwb.trainon;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import org.xml.sax.SAXException;
 
@@ -26,14 +30,45 @@ import uwb.trainon.managers.FileManager;
 import uwb.trainon.managers.UserManager;
 import uwb.trainon.models.ProvisionViewModel;
 
+import static uwb.trainon.R.id.button;
+
 public class ProvisionsActivity extends Fragment
 {
     public View myView;
     private UserManager _userManager;
     private FileManager _fileManager;
 
+    public static boolean IsAdd = false;
+
     public void set_userManager(UserManager _userManager) {
         this._userManager = _userManager;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (IsAdd)
+        {
+            IsAdd = false;
+
+            this.RefreshActivity();
+
+            Toast.makeText(
+                    myView.getContext(),
+                    "Poprawnie dodano postanowienie.",
+                    Toast.LENGTH_LONG
+            ).show();
+        }
+    }
+
+    private void RefreshActivity()
+    {
+        getFragmentManager()
+                .beginTransaction()
+                .detach(ProvisionsActivity.this)
+                .attach(ProvisionsActivity.this)
+                .commit();
     }
 
     @Nullable
@@ -63,13 +98,16 @@ public class ProvisionsActivity extends Fragment
         }
     }
 
-    private void InitializePervisonList(LayoutInflater inflater)
+    private void InitializePervisonList(final LayoutInflater inflater)
             throws IOException, SAXException, ParserConfigurationException
     {
         LinearLayout pervisionsList = (LinearLayout) myView.findViewById(R.id.provisions_list);
 
-        List<ProvisionViewModel> provisionViewModelList = _fileManager.GetProvisions(_userManager.User.Login);
-        for (ProvisionViewModel provision : provisionViewModelList)
+        if (pervisionsList.getChildCount() != 0)
+            pervisionsList.removeAllViews();
+
+        final List<ProvisionViewModel> provisionViewModelList = _fileManager.GetProvisions(_userManager.User.Login);
+        for (final ProvisionViewModel provision : provisionViewModelList)
         {
             View provisonView = inflater.inflate(R.layout.item_provisions, pervisionsList, false);
             TextView targetTextView = (TextView) provisonView.findViewById(R.id.pervision_target);
@@ -80,6 +118,66 @@ public class ProvisionsActivity extends Fragment
             activityTextView.setText(provision.Activity);
             dateTextView.setText(provision.Realization.toString());
 
+            Button deleteBtn = (Button) provisonView.findViewById(R.id.delete_pervisions_button);
+            View.OnClickListener deleteBtnListener = new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View view)
+                {
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(myView.getContext());
+                    builder1.setMessage(StringExtensions.DeleteProvisionConfirmation);
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Tak",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    try
+                                    {
+                                        _fileManager.DeleteProvision(
+                                                provisionViewModelList.indexOf(provision),
+                                                _userManager.User.Login
+                                        );
+
+                                        RefreshActivity();
+
+                                        Toast.makeText(
+                                                myView.getContext(),
+                                                "Poprawnie usunięto postanowienie.",
+                                                Toast.LENGTH_LONG
+                                        ).show();
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        AlertDialogExtension.ShowAlert(
+                                                ex.getMessage(),
+                                                StringExtensions.ErrorTitle,
+                                                myView.getContext()
+                                        );
+                                    }
+
+                                    dialog.dismiss();
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "Nie",
+                            new DialogInterface.OnClickListener()
+                            {
+                                public void onClick(DialogInterface dialog, int id)
+                                {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+            };
+
+            deleteBtn.setOnClickListener(deleteBtnListener);
             pervisionsList.addView(provisonView);
         }
     }

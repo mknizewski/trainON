@@ -6,13 +6,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.sql.Date;
 import java.util.Calendar;
@@ -64,6 +62,7 @@ public class AddProvisionActivity extends AppCompatActivity
             ProvisionViewModel viewModel = this.GetProvisionViewModel();
             _fileManager.AddProvisions(_userManager.User.Login, viewModel);
 
+            ProvisionsActivity.IsAdd = true;
             finish();
         }
         catch (Exception ex)
