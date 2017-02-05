@@ -133,6 +133,7 @@ public class Main2Activity extends AppCompatActivity
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, statsActivity)
                     .commit();
+            setTitle("Statystyki");
         }
         else if (id == R.id.nav_provisions)
         {
@@ -143,7 +144,6 @@ public class Main2Activity extends AppCompatActivity
                     .replace(R.id.content_main2, provisionsActivity)
                     .commit();
             setTitle("Postanowienia");
-            setTitle("Ustawienia");
         }
         else if (id == R.id.nav_authors)
         {
