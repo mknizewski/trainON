@@ -13,28 +13,31 @@
     android:rowCount="1">
 
     <RelativeLayout
-        android:id="@+id/loadingPanel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center" >
+    android:id="@+id/loadingPanel"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center" >
 
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:indeterminate="true"
-            android:indeterminateTint="@android:color/holo_green_light"/>
+    <ProgressBar
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:indeterminate="true"
+    android:indeterminateTint="@android:color/holo_green_light"/>
     </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/panel_log"
         android:layout_gravity="center"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:visibility="gone">
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/logo_trainon"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="wrap_content"

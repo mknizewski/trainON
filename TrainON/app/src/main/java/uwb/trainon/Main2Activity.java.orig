@@ -128,11 +128,16 @@ public class Main2Activity extends AppCompatActivity
         }
         else if (id == R.id.nav_stats)
         {
+<<<<<<< HEAD
             StatsActivity statsActivity = new StatsActivity();
             statsActivity.SetUserManager(_userManager);
+
             fragmentManager.beginTransaction()
                     .replace(R.id.content_main2, statsActivity)
                     .commit();
+=======
+            setTitle("Statystyki");
+>>>>>>> adf21c67ed89ce96930178e4a320477e5175d92a
         }
         else if (id == R.id.nav_provisions)
         {
@@ -143,8 +148,17 @@ public class Main2Activity extends AppCompatActivity
                     .replace(R.id.content_main2, provisionsActivity)
                     .commit();
             setTitle("Postanowienia");
+        }
+<<<<<<< HEAD
+=======
+        else if (id == R.id.nav_settings)
+        {
+            fragmentManager.beginTransaction()
+                    .replace(R.id.content_main2, new SettingsActivity())
+                    .commit();
             setTitle("Ustawienia");
         }
+>>>>>>> adf21c67ed89ce96930178e4a320477e5175d92a
         else if (id == R.id.nav_authors)
         {
             fragmentManager.beginTransaction()
