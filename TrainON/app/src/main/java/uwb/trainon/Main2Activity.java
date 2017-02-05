@@ -135,12 +135,6 @@ public class Main2Activity extends AppCompatActivity
                     .replace(R.id.content_main2, provisionsActivity)
                     .commit();
         }
-        else if (id == R.id.nav_settings)
-        {
-            fragmentManager.beginTransaction()
-                    .replace(R.id.content_main2, new SettingsActivity())
-                    .commit();
-        }
         else if (id == R.id.nav_authors)
         {
             fragmentManager.beginTransaction()
