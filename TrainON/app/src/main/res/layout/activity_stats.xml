@@ -9,62 +9,74 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
+
+            <TableLayout
+                android:id="@+id/tableLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_margin="25dp"
+                android:background="@color/aplha2">
+                <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ilość treningów odbytych: "
-                    android:textColor="@color/colorBlack"/>
-                <TextView
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:text="Ilość treningów odbytych: " />
+                    <TextView
+                        android:text="23"
+                        android:id="@+id/stats_good_count"
+                        android:textStyle="normal|bold"
+                        android:textSize="16sp" />
+                </TableRow>
+                <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="23"
-                    android:id="@+id/stats_good_count"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ilość treningów nieodbytych: "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="12"
+                        android:id="@+id/stats_notgood_count"
+                        android:textStyle="normal|bold"
+                        android:textSize="16sp" />
+                </TableRow>
+                <TableRow
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Ilość treningów nieodbytych: "
-                    android:textColor="@color/colorBlack"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="12"
-                    android:id="@+id/stats_notgood_count"/>
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Do tej pory uczestniczyłeś w "
-                    android:textColor="@color/colorBlack" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="34%"
-                    android:id="@+id/stats_percentage"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text=" treningów"
-                    android:textColor="@color/colorBlack"/>
-            </LinearLayout>
+                    android:layout_margin="10dp">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Do tej pory uczestniczyłeś w "
+                      />
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="fill_parent"
+                        android:text="25%"
+                        android:id="@+id/stats_percentage"
+                        android:textStyle="normal|bold"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=" treningów"
+                        />
+                </TableRow>
+            </TableLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Historia"
                 android:textSize="24dp"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center"
+                android:textAlignment="center"
+                android:textStyle="normal|bold"
+                android:fontFamily="serif" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

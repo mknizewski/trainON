@@ -4,15 +4,43 @@
     android:id="@+id/activity_add_trening"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="uwb.trainon.AddTreningActivity"
     android:layout_column="1"
     android:layout_row="2">
+
+
     <LinearLayout
         android:layout_column="0"
-        android:layout_row="0"
+        android:layout_row="2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Dodaj"
+            android:onClick="onClickAddTrening"
+            android:background="@color/colorPrimaryDark"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cofnij"
+            android:onClick="onClickCancel"
+            android:background="@color/colorGray"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_column="0"
+        android:layout_row="0"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/aplha2"
+        android:padding="10dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,91 +49,106 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Dzień tygodnia: "
-                android:textColor="@color/colorBlack"/>
+                android:layout_gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"/>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/trening_days"
-                android:id="@+id/trening_add_day"></Spinner>
+                android:layout_gravity="center"
+                android:id="@+id/trening_add_day"
+                android:popupBackground="@android:color/holo_green_dark"></Spinner>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Aktywność: "
-                android:textColor="@color/colorBlack"/>
+                android:layout_gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"/>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:entries="@array/sport_activity_list"
-                android:id="@+id/trening_add_activity">
+                android:layout_gravity="center"
+                android:id="@+id/trening_add_activity"
+                android:popupBackground="@android:color/holo_green_dark">
             </Spinner>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Pora: "
-                android:textColor="@color/colorBlack"/>
+                android:layout_gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"/>
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:entries="@array/trening_times"
-                android:id="@+id/trening_add_time"></Spinner>
+                android:id="@+id/trening_add_time"
+                android:popupBackground="@android:color/holo_green_dark"></Spinner>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="5dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Liczba godzin: "
-                android:textColor="@color/colorBlack"/>
+                android:layout_gravity="center"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="34"
+                android:layout_gravity="center"
+                android:text=""
+                android:hint="Podaj czas treningu..."
+                android:textColorHint="@color/colorWhite2"
+                android:textSize="16dp"
                 android:inputType="numberSigned"
                 android:id="@+id/trening_add_hours"/>
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_marginTop="7dp">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Komenatarz: "
-                android:textColor="@color/colorBlack"/>
+                android:layout_gravity="left"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:fontFamily="serif"/>
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:textSize="16dp"
                 android:inputType="textMultiLine"
-                android:id="@+id/trening_add_comment"/>
+                android:id="@+id/trening_add_comment"
+                android:hint="Opisz jak ma wyglądać twój trening..."
+                android:textColorHint="@color/colorWhite2" />
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_column="0"
-        android:layout_row="1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Dodaj"
-            android:onClick="onClickAddTrening"/>
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cofnij"
-            android:onClick="onClickCancel"/>
     </LinearLayout>
 </GridLayout>
