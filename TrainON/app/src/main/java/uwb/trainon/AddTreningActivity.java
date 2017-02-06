@@ -42,10 +42,10 @@ public class AddTreningActivity extends AppCompatActivity
 
     public void onClickAddTrening(View view)
     {
+
         try
         {
             TreningViewModel treningViewModel = GetViewModel();
-
             if (_fileManager.CheckIfExistsTrening(treningViewModel.Day, _userManager.User.Login))
                 throw new Exception(MessagesDictionary.TreningIsExists);
 
@@ -57,7 +57,7 @@ public class AddTreningActivity extends AppCompatActivity
         catch (Exception ex)
         {
             AlertDialogExtension.ShowAlert(
-                    "Podaj czas treningu!",
+                    MessagesDictionary.TreningIsExists,
                     StringExtensions.ErrorTitle,
                     AddTreningActivity.this
             );

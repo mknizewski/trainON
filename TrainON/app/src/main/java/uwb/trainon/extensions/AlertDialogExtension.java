@@ -24,9 +24,9 @@ public class AlertDialogExtension
                                  Context activity)
     {
 
-        //ContextThemeWrapper ctw = new ContextThemeWrapper(activity, R.style.Dialogmine);
+        ContextThemeWrapper ctw = new ContextThemeWrapper(activity, R.style.Dialogmine);
 //        final AlertDialog alertDialog = new AlertDialog.Builder(ctw).create();
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        AlertDialog.Builder builder = new AlertDialog.Builder(ctw);
         builder.setTitle(title);
         builder.setIcon(R.drawable.danger);
         builder.setMessage(meesage);
