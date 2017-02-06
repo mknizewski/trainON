@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.sql.Date;
 import java.util.Calendar;
 
+import uwb.trainon.dictionaries.MessagesDictionary;
 import uwb.trainon.extensions.AlertDialogExtension;
 import uwb.trainon.extensions.StringExtensions;
 import uwb.trainon.managers.FileManager;
@@ -68,7 +69,7 @@ public class AddProvisionActivity extends AppCompatActivity
         catch (Exception ex)
         {
             AlertDialogExtension.ShowAlert(
-                    "Podaj cel treningu!",
+                    MessagesDictionary.Provisions,
                     StringExtensions.ErrorTitle,
                     AddProvisionActivity.this);
         }
