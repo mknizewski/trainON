@@ -121,10 +121,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text=""
                 android:hint="Podaj czas treningu..."
                 android:textColorHint="@color/colorWhite2"
                 android:textSize="16dp"
+                android:text=""
                 android:inputType="numberSigned"
                 android:id="@+id/trening_add_hours"/>
         </LinearLayout>

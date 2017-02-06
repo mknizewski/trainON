@@ -24,13 +24,18 @@ public class AlertDialogExtension
                                  Context activity)
     {
 
-        ContextThemeWrapper ctw = new ContextThemeWrapper(activity, R.style.Dialogmine);
+        //ContextThemeWrapper ctw = new ContextThemeWrapper(activity, R.style.Dialogmine);
 //        final AlertDialog alertDialog = new AlertDialog.Builder(ctw).create();
-        AlertDialog.Builder builder = new AlertDialog.Builder(ctw);
-        builder.setTitle("UWAGA!");
+        AlertDialog.Builder builder = new AlertDialog.Builder(activity);
+        builder.setTitle(title);
         builder.setIcon(R.drawable.danger);
         builder.setMessage(meesage);
-        builder.setPositiveButton("OK", null);
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
 
         AlertDialog alertDialog = builder.create();
         alertDialog.show();
