@@ -35,7 +35,12 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-
+    <style name="Dialogmine" parent="@android:style/Theme.Dialog">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textAppearance">@color/colorGreen</item>
+        <item name="android:textColorPrimary">@color/colorBlack</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

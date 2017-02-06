@@ -57,7 +57,7 @@ public class AddTreningActivity extends AppCompatActivity
         catch (Exception ex)
         {
             AlertDialogExtension.ShowAlert(
-                    ex.getMessage(),
+                    "Podaj czas treningu!",
                     StringExtensions.ErrorTitle,
                     AddTreningActivity.this
             );

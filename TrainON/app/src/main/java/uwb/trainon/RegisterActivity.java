@@ -50,7 +50,7 @@ public class RegisterActivity extends AppCompatActivity
         catch (Exception ex)
         {
             AlertDialogExtension.ShowAlert(
-                    ex.getMessage(),
+                    "Uzupełnij wszystkie pola!",
                     StringExtensions.ErrorTitle,
                     RegisterActivity.this);
         }

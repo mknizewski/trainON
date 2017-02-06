@@ -68,7 +68,7 @@ public class AddProvisionActivity extends AppCompatActivity
         catch (Exception ex)
         {
             AlertDialogExtension.ShowAlert(
-                    ex.getMessage(),
+                    "Podaj cel treningu!",
                     StringExtensions.ErrorTitle,
                     AddProvisionActivity.this);
         }
